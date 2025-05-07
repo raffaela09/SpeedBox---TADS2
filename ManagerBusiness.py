@@ -1,0 +1,9 @@
+class ManagerBusiness:
+    def __init__(self):
+        pass
+    def schedule_delivery():
+        ...
+    def refuse_delivery():
+        ...
+    def evaluate_delivery():
+        ...
