@@ -70,7 +70,7 @@ class User(Person):
         pass
 
     def verify_pwd(self, pwd):
-        return self.__pwd == pwd #verificando se a senha inserida eh igual a senha armazenada
+        return self.__pwd == pwd #checking if the entered password is equal to the stored password
 
 class Client(User):
     def __init__(self, name: str, cpf: str, email: str, pwd: str, user_type: str, phone: int):
