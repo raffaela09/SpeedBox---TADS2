@@ -99,7 +99,7 @@ class Client(User):
 
     def cancel_order(self):
         if self.status == "canceled":
-            print("Pedido ja cancelado.")
+            print("Order already canceled.")
         else:
             self.status = "Cancel"
-            print("Pedido cancelado com sucesso.")
+            print("Order canceled successfully.")
