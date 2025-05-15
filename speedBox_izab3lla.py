@@ -1,6 +1,6 @@
 import uuid
 from save_json import load_users, save_users
-from inputs_user import login_user, register_user, cancel_input
+from inputs_user import login_user, register_user, cancel_input, place_order, received
 
 class Person:
     def __init__(self, name: str, cpf: str):
@@ -64,18 +64,33 @@ class User(Person):
     def login(self, email, pwd): 
         users = load_users() # Loading the list of existing users from the JSON
         email, pwd = login_user() # Using inputs from another file
-       
-    
+
+        for user in users: #percorro o json salvo
+            if user ["email"] == email:
+                if user ["pwd"] == pwd:
+                    print("email confirmado!")
+                else:
+                    print("email nao encontrado, cadastra-se")
+
     def create_account(self, name, cpf, email, pwd):
         users = load_users() 
         name, cpf, email, pwd = register_user()
+
+        if email in users: #verifica a existencia do email e se ele já foi cadastrado anteriormente
+            print("Email already registered")
+            return 
         
+        new_user = User(name, cpf, email, pwd) #caso não entre na condição acima ele regristra o novo usuario
+        users.append(new_user) #coloca ele na lista
+        save_users(users) #salva no json
+        print("Registration successful!")
 
     def view_delivery_history(self):
         pass
 
     def verify_pwd(self, pwd):
-        return self.__pwd == pwd #checking if the entered password is equal to the stored password
+      pass#checking if the entered password is equal to the stored password
+    
 
 class Client(User):
     def __init__(self, name: str, cpf: str, email: str, pwd: str, user_type: str, phone: int):
@@ -96,15 +111,22 @@ class Client(User):
         self._phone = value
 
     def request_delivery(self):
-        pass
+        response = place_order()
+        if response:
+            self.status = "Order confirmed!"
 
     def receive_delivery(self):
-        if self.status == "On route":
-            self.status = "Delivered"
+        received_confirmation = received()
+        if self.status == "on route":
+            if received_confirmation:
+                print("Order delivered!")
+        else:
+            print("Order canceled!")
 
     def cancel_order(self):
-        if self.status == "canceled":
+        confirm = cancel_input()  # calling function created in the inputs page
+        if self.status == "canceled":  # check if the order has already been canceled
             print("Order already canceled.")
-        else:
-            self.status = "Cancel"
+        elif confirm:
+            self.status = "canceled"  # if not canceled, confirm and cancel the order
             print("Order canceled successfully.")
