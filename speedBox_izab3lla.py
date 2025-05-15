@@ -68,9 +68,9 @@ class User(Person):
         for user in users: # Iterate through the saved JSON data
             if user ["email"] == email:
                 if user ["pwd"] == pwd:
-                    print("email confirmado!")
+                    print("Email confirmed!")
                 else:
-                    print("email nao encontrado, cadastra-se")
+                    print("Email not found. Please register.")
 
     def create_account(self, name, cpf, email, pwd):
         users = load_users() 
