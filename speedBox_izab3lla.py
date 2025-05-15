@@ -1,5 +1,6 @@
-import json #pretendo usar no login
 import uuid
+from save_json import load_users, save_users
+from inputs_user import login_user, register_user, cancel_input
 
 class Person:
     def __init__(self, name: str, cpf: str):
@@ -22,7 +23,7 @@ class Person:
     def _cpf(self, value):
         self.__cpf = value
 
-    # Takes no arguments
+    #Takes no arguments
 
 class User(Person):
     def __init__(self, name: str, cpf: str, email: str, pwd: str, user_type: str):
@@ -60,11 +61,15 @@ class User(Person):
     def user_type(self, value):
         self._user_type = value
 
-    def login(self): #talvez usar json 
-        pass
+    def login(self, email, pwd): 
+        users = load_users() # Loading the list of existing users from the JSON
+        email, pwd = login_user() # Using inputs from another file
+       
     
-    def create_account(self):
-        pass
+    def create_account(self, name, cpf, email, pwd):
+        users = load_users() 
+        name, cpf, email, pwd = register_user()
+        
 
     def view_delivery_history(self):
         pass
@@ -79,7 +84,7 @@ class Client(User):
        self._phone = phone
 
     @property
-    def __id(self): # ID generated via UUID, encapsulated with read-only access
+    def __id(self): #ID generated via UUID, encapsulated with read-only access
         return self.__id 
 
     @property
