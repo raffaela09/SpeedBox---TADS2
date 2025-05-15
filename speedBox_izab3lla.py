@@ -65,7 +65,7 @@ class User(Person):
         users = load_users() # Loading the list of existing users from the JSON
         email, pwd = login_user() # Using inputs from another file
 
-        for user in users: #percorro o json salvo
+        for user in users: # Iterate through the saved JSON data
             if user ["email"] == email:
                 if user ["pwd"] == pwd:
                     print("email confirmado!")
@@ -76,13 +76,13 @@ class User(Person):
         users = load_users() 
         name, cpf, email, pwd = register_user()
 
-        if email in users: #verifica a existencia do email e se ele já foi cadastrado anteriormente
+        if email in users: # Checks if the email exists and has already been registered
             print("Email already registered")
             return 
         
-        new_user = User(name, cpf, email, pwd) #caso não entre na condição acima ele regristra o novo usuario
-        users.append(new_user) #coloca ele na lista
-        save_users(users) #salva no json
+        new_user = User(name, cpf, email, pwd) # If the above condition is not met, it registers the new user
+        users.append(new_user)# Adds the user to the list
+        save_users(users) # Saves to the JSON file
         print("Registration successful!")
 
     def view_delivery_history(self):
