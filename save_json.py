@@ -7,7 +7,6 @@ def user_dic(self): #creating the dictionary for the json
           "cpf": self.__cpf,
           "email": self._email,
           "pwd": self.__pwd,
-          "user_type": self._user_type
       }  
     
 # Implementing JSON to save the user
