@@ -1,6 +1,7 @@
 import uuid
 from save_json import load_users, save_users
 from inputs_user import login_user, register_user, cancel_input, place_order, received
+from Validations import validate_pwd, validate_cpf
 
 class Person:
     def __init__(self, name: str, cpf: str):
@@ -69,6 +70,7 @@ class User(Person):
             if user ["email"] == email:
                 if user ["pwd"] == pwd:
                     print("Email confirmed!")
+                    return
                 else:
                     print("Email not found. Please register.")
 
@@ -76,31 +78,28 @@ class User(Person):
         users = load_users() 
         name, cpf, email, pwd = register_user()
 
+        if not validate_cpf(cpf):
+            return
+
+        if not validate_pwd(pwd):
+            return
+
         if email in users: # Checks if the email exists and has already been registered
             print("Email already registered")
             return 
         
         new_user = User(name, cpf, email, pwd) # If the above condition is not met, it registers the new user
-        users.append(new_user)# Adds the user to the list
+        users.append(new_user.user_dic())# Adds the user to the list
         save_users(users) # Saves to the JSON file
         print("Registration successful!")
 
     def view_delivery_history(self):
         pass
-
-    def verify_pwd(self, pwd):
-      pass#checking if the entered password is equal to the stored password
-    
-
+        
 class Client(User):
     def __init__(self, name: str, cpf: str, email: str, pwd: str, user_type: str, phone: int):
        super().__init__(name, cpf, email, pwd, user_type)
-       self.__id = str(uuid.uuid4())[:4]
        self._phone = phone
-
-    @property
-    def __id(self): #ID generated via UUID, encapsulated with read-only access
-        return self.__id 
 
     @property
     def phone(self):
@@ -108,18 +107,18 @@ class Client(User):
 
     @phone.setter
     def phone(self, value):
-        self._phone = value
+        self._phone = value 
 
     def request_delivery(self):
         response = place_order()
-        if response:
+        if response: 
             self.status = "Order confirmed!"
 
     def receive_delivery(self):
         received_confirmation = received()
-        if self.status == "on route":
-            if received_confirmation:
-                print("Order delivered!")
+        if self.status == "on route": # Checks if the status is "on route"
+            if received_confirmation:# if so, confirms it
+                print("Order delivered!") # Otherwise, the status will be "confirmed"
         else:
             print("Order canceled!")
 
