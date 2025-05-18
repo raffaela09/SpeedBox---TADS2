@@ -1,14 +1,5 @@
 import json
-
-def user_dic(self): #creating the dictionary for the json
-      return {
-          "id": self.__id,
-          "name": self._name,
-          "cpf": self.__cpf,
-          "email": self._email,
-          "pwd": self.__pwd,
-      }  
-    
+ 
 # Implementing JSON to save the user
 def load_users():#loads the existing users
     try:
@@ -17,6 +8,8 @@ def load_users():#loads the existing users
     except FileNotFoundError:
         return [] 
 
+#salva na lista e joga dentro do json "users.json" com o dump
 def save_users(users): #saves in a list
     with open("users.json", "w") as file:
         json.dump(users, file, indent=4)
+        
