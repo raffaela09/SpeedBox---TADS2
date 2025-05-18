@@ -1,10 +1,14 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
+from save_json import load_orders, save_orders, update_json
+from speedBox_izab3lla import Client
+from DeliveryMan import DeliveryMan
 
 class Delivery:
-    def __init__(self, status: str, client, driver, pickup: str, destination: str, distance: int):
+    def __init__(self, status: str, client: Client, deliveryMan: DeliveryMan, pickup: str, destination: str, distance: int):
         self.__status = status 
         self.__client = client
-        self.__driver = driver
+        self.__deliveryMan = deliveryMan
         self.__pickup = pickup
         self.__destination = destination 
         self.__distance = distance
@@ -56,9 +60,6 @@ class Delivery:
     @distance.setter
     def distance(self, value):
         self.__distance = value       
-        
-    def calculate_estimated_time(self): # rever
-        pass
 
 class Transport(ABC):
     @abstractmethod
@@ -87,7 +88,6 @@ class Motorcyle(Transport):
     def price_per_km(self, value):
         self.__price_per_km = value 
     
-    # dividir distancia por vel media, transformar em min
     def estimated_time(self, distance):
         return distance / self.average_speed
     
@@ -191,105 +191,138 @@ class Merchandise:
         self.__delivery_status = value 
         
 class Payment(ABC): 
+    def __init__(self, value: float):
+        self.value = value
+        self.confirmed = False
+        self.refunded = False
+        
     @abstractmethod
     def confirm_payment(self):
         pass
     def refund_payment(self):
         pass
     def payment_receipt(self):
-        pass 
-    
-class Credit(Payment):
-    def confirm_payment(self):
         pass
-    def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
     def pay_in_installments(self):
         pass
+    
+class Credit(Payment):
+    def __init__(self, value: float):
+        super().__init__(value)
+    
+    def confirm_payment(self):
+        self.confirmed = True 
+        self.payment_date = datetime.now()
+        return ("Pagamento confirmado!")
+        
+    def refund_payment(self):
+        '''caso o pagamento não seja aceito (não foi confirmado), o estorno será feito imediatamente'''
+        if not self.confirmed:
+            return ("Pagamento não confirmado.")
+        if self.refunded:
+            return ("Pagamento já estornado.")
+        '''no caso de ser apenas um estorno'''
+        self.refunded = True
+        return ("Pagamento estornado com sucesso!")
+        
+    def payment_receipt(self):
+        return(
+            "--- RECIBO ---\n"
+            f"Valor: {self.value}\n"
+            f"Data: {self.payment_date}\n"
+            "Status: Confirmado"
+        )
+        
+    def pay_in_installments(self, installments=2):
+        if installments<1:
+            return ("Número de parcelas inválido.")
+        value_per_installments = self.value / installments
+        return (f"{installments}x de {value_per_installments} no cartão.")
 
 class Debit(Payment):
+    def __init__(self, value: float):
+        super().__init__(value)
+    
     def confirm_payment(self):
-        pass
+        self.confirmed = True
+        return ("Pagamento confirmado!")
     def refund_payment(self):
-        pass
+        if not self.confirmed:
+            return ("Pagamento não confirmado.")
+        if self.refunded:
+            return ("Pagamento já estornado.")
+        self.refunded = True
+        return ("Pagamento estornado com sucesso!")
     def payment_receipt(self):
-        pass 
+        return(
+            "--- RECIBO ---\n"
+            f"Valor: {self.value}\n"
+            f"Data: {self.payment_date}\n"
+            "Status: Confirmado"
+        )
 
 class Pix(Payment):
-    def __init__(self, pix_key: str):
-        self.__pix_key = pix_key
-        
-    @property
-    def pix_key(self):
-        return self.__pix_key
-    
-    @pix_key.setter
-    def pix_key(self, value):
-        self.__pix_key = value 
+    def __init__(self, value: float, pix_key: str):
+        super().__init__(value)
+        self._pix_key = pix_key
     
     def confirm_payment(self):
-        pass
+        self.confirmed = True
+        return("Pagamento confirmado!")
     def refund_payment(self):
-        pass
+        if not self.confirmed:
+            return("Pagamento não confirmado.")
+        if self.refunded:
+            return("Pagamento já estornado.")
+        self.refunded = True
+        return("Pagamento estornado com sucesso!")
     def payment_receipt(self):
-        pass 
+        return(
+            "--- RECIBO ---\n"
+            f"Valor: {self.value}\n"
+            f"Data: {self.payment_date}\n"
+            "Status: Confirmado"
+        )
 
 class Cash(Payment):
+    def __init__(self, value: float):
+        super().__init__(value)
+    
     def confirm_payment(self):
-        pass 
+        self.confirmed = True
     def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
-    def calculate_change(self):
-        pass
-
+        if not self.confirmed:
+            return("Pagamento não confirmado.")
+        if self.refunded:
+            return("Pagamento já estornado.")
+    def calculate_change(self, paid_value):
+        return paid_value - self.value
+  
 class Order:
-    def __init__(self, order_num: int, pickup: str, price: float, payment_method: Payment): 
-        self.__order_num = order_num
-        self.__pickup = pickup
-        self.__price = price 
-        self.__payment_method = payment_method
-        
-    @property
-    def order_num(self):
-        return self.__order_num
-    
-    @order_num.setter
-    def order_num(self, value):
-        self.__order_num = value 
-        
-    @property
-    def pickup(self):
-        return self.__pickup
-    
-    @pickup.setter
-    def pickup(self, value):
-        self.__pickup = value 
-        
-    @property
-    def price(self):
-        return self.__price
-    
-    @price.setter
-    def price(self, value):
-        self.__price = value 
-        
-    @property
-    def payment_method(self):
-        return self.__payment_method
-    
-    @payment_method.setter
-    def payment_method(self, value):
-        self.__payment_method = value 
-
-    def create(self):
-        pass
-    def read(self):
-        pass
-    def update(self):
-        pass
+    def __init__(self, order_num: int): 
+        self._order_num = order_num
+    #retorna os dados do pedido dentro de um dicionario, pra gente poder passar pro json e criar o pedido dentro do json    
+    def dic_order(self, email, num_order, name_product, distance):
+        return{
+            "email": email,
+            "num_order": num_order,
+            "name_product": name_product,
+            "distance": distance,
+            "status": "on hold" #em espera, ou seja aguardando o gerente aceitar o pedido, para que possa dar procedencia
+        }  
+    def create(self, email, name_product, distance):
+        orders = load_orders()
+        new_order = self.dic_order(email, self._order_num, name_product, distance)
+        orders.append(new_order)
+        save_orders(orders)
+        print(f"Pedido efetuado: {new_order}")
+    #verificar esse update, ja que essa funcao vai ser mt importante pras demais coisas, pra atualizar status etc
+    def update(self, update_data: dict):
+        code = ["num_order"]
+        update_json(update_data, code)
+        print(f"Pedido {update_data.get('num_order')} atualizado.")
     def delete(self):
-        pass
+        orders = load_orders()
+        orders = [order for order in orders if order.get("num_order") != self._order_num]
+        save_orders(orders)
+        print(f"Pedido {self._order_num} deletado.")
