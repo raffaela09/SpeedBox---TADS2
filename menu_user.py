@@ -13,19 +13,18 @@ def register_user():
     email = input("Email: ")
     validate_email(email)
 
-    pwd = getpass.getpass("Password: ") #Mascara a senha no prompt
+    pwd = getpass.getpass("Password: ") #Masks the password in the prompt
     validate_pwd(pwd)
     encry_pwd = pwd.encode('utf-8') 
-    pwd_hash = bcrypt.hashpw(encry_pwd, bcrypt.gensalt())#
-    pwd_hash_str = pwd_hash.decode('utf-8') #converte de bytes para str para o json poder aceitar
-
+    pwd_hash = bcrypt.hashpw(encry_pwd, bcrypt.gensalt())
+    pwd_hash_str = pwd_hash.decode('utf-8') #Converts from bytes to string so JSON can accept it
     user_type = input("Type of user (client, deliveryman or manager): ").lower()
     validate_user_type(user_type)
 
     user_register = User(name, cpf, email, pwd_hash_str, user_type)
-    #aqui eu chamo o user dict pra poder devolver como dicionario e salvar tudo no json com o create_account
+    #Here I call the user dict to return it as a dictionary and save everything to the JSON using create_account
     user_to_dict = user_register.user_dic(name, cpf, email, pwd_hash_str, user_type)
-    #e aqui chamei o metodo de criar a conta, pra que o metodo possa receber esses dados que estao como dicionario e salva dentro do json.
+    #And here I called the create_account method so it can receive the data as a dictionary and save it into the JSON.
     User_service.create_account(user_to_dict)
 
 def login_user():
@@ -33,7 +32,7 @@ def login_user():
     email = input("Email: ")
     pwd = getpass.getpass("Password: ")
     
-    #chama a funcao de login do usuario, que vai verificar
+    #Calls the user login function, which will verify
     User_service.login(email,pwd)
     
 
