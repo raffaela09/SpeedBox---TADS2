@@ -67,9 +67,6 @@ class User(Person):
             "pwd": pwd,
             "type_user": user_type
         }  
-
-    def view_delivery_history(self):
-        pass
   
 class Client(User):
     def __init__(self, name: str, cpf: str, email: str, pwd: str, user_type: str, phone: int):
@@ -83,6 +80,11 @@ class Client(User):
     @phone.setter
     def phone(self, value):
         self._phone = value 
+    
+    def user_dic(self):
+        pho = super().user_dic()
+        pho["phone"] = self.phone
+        return pho
 
     def request_delivery(self, place_order):
         response = place_order

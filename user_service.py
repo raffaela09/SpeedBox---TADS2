@@ -21,3 +21,18 @@ class User_service:
         users.append(user_dict)# Adds the user to the list
         save_users(users) # Saves to the JSON file 
         print("Registration successful!")
+
+    def view_delivery_history(email):
+        orders = load_orders()
+        #here it goes through the emails to find orders
+        his_order = [order for order in orders if order.get("email") == email]
+
+        if not his_order:
+            raise ValueError("You dont have delivery history.")
+        else:
+            for i, order in enumerate(his_order, start=1):
+                items = ", ".join(order.get("items", []))
+                status = order.get("status", "Unknown")
+                print(f"\nOrder {i}")
+                print(f"Items : {items}")
+                print(f"Status: {status}")
