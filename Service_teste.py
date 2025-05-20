@@ -21,3 +21,11 @@ def change_status(number_order, email_user, mensage_status_search, mensage_statu
     if not found:
         raise ProductNotFoundError("Order not found or status did not match.")
             
+def show_history(type_user, email_user):
+    orders = load_orders()
+    if orders:
+        for order in orders:
+            if type_user in order and order[type_user] == email_user:
+                print(f"\nCode order: {order["num_order"]}\nProduct:  {order["name_product"]}\nDistance: {order["distance"]}\nStatus: {order["status"]}\n")
+    else:
+        raise NoProductsToDisplayError("There are no orders to display.")
