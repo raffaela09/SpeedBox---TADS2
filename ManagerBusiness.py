@@ -20,7 +20,7 @@ class ManagerBusiness(User):
                     keys=["num_order"]
                 )
             else:
-                pass
+               raise ProductNotFoundError("Order not found.") 
     #-----------------------------------------------------------------------------------
     
     
@@ -41,7 +41,7 @@ class ManagerBusiness(User):
                 )
                 break
         else:
-            pass
+            raise ProductNotFoundError("Order not found.")
     #-----------------------------------------------------------------------------------
             
     def evaluate_delivery():

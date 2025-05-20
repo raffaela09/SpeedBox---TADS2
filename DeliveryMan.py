@@ -18,7 +18,7 @@ class DeliveryMan(User):
                     keys=["num_order"]
                 )
             else:
-                pass
+                raise ProductNotFoundError("Order not found.")
     #-----------------------------------------------------------------------------------
     
     def collect_delivery(self, num_order):
@@ -33,7 +33,7 @@ class DeliveryMan(User):
                     keys=["num_order"]
                 )
             else:
-                pass
+                raise ProductNotFoundError("Order not found.")
     #-----------------------------------------------------------------------------------
 
   
