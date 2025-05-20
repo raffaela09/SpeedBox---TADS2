@@ -1,7 +1,5 @@
-from Exceptions import ProductNotFoundError
 from speedBox_izab3lla import User
-from save_json import load_orders, update_json
-from Service_teste import change_status
+from service import change_status
 class ManagerBusiness(User):
     def __init__(self, name, cpf, email, pwd, user_type):
         super().__init__(name, cpf, email, pwd, user_type)
@@ -9,7 +7,7 @@ class ManagerBusiness(User):
     '''funcao responsável por aceitar um pedido, irá verificar de acordo com o código do pedido se está no json e com o status correto (nesse caso, status de em espera),
     caso esteja, ele chama a funcao de atualizar os dados do json, que passa o que vai ser atualizado e por qual chave ele deve procurar dentro do json para atulizar, caso contrario, ele levanta uma excecao.
     ''' 
-    def schedule_delivery(self, num_order, email, ):
+    def schedule_delivery(self, num_order, email, user_type ):
         change_status(
             number_order = num_order, 
             email_user = email,
