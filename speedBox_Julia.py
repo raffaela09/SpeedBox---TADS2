@@ -30,12 +30,12 @@ class Delivery:
         self.__client = value
         
     @property
-    def driver(self):
-        return self.__driver
+    def deliveryMan(self):
+        return self.__deliveryMan
     
-    @driver.setter
-    def driver(self, value):
-        self.__driver = value
+    @deliveryMan.setter
+    def deliveryMan(self, value):
+        self.__deliveryMan = value
         
     @property
     def pickup(self):
@@ -92,7 +92,7 @@ class Motorcyle(Transport):
         return distance / self.average_speed
     
     def total_price(self, distance):
-        return distance / self.price_per_km
+        return distance * self.price_per_km
 
 class Car(Transport):
     def __init__(self, license_plate: str, price_per_km: float, average_speed: float):
@@ -245,6 +245,7 @@ class Debit(Payment):
     
     def confirm_payment(self):
         self.confirmed = True
+        self.payment_date = datetime.now()
         return ("Pagamento confirmado!")
     def refund_payment(self):
         if not self.confirmed:
@@ -268,6 +269,7 @@ class Pix(Payment):
     
     def confirm_payment(self):
         self.confirmed = True
+        self.payment_date = datetime.now()
         return("Pagamento confirmado!")
     def refund_payment(self):
         if not self.confirmed:
@@ -290,6 +292,7 @@ class Cash(Payment):
     
     def confirm_payment(self):
         self.confirmed = True
+        self.payment_date = datetime.now()
     def refund_payment(self):
         if not self.confirmed:
             return("Pagamento não confirmado.")
