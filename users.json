@@ -1,0 +1,44 @@
+[
+    {
+        "name": "julia",
+        "cpf": "08238539188",
+        "email": "julia@gmail.com",
+        "pwd": "$2b$12$QwBO2fAhgeL8FG0dDxNnP.osCZ1RWkippoXvbwKVhrGGo.tLTxmpK",
+        "type_user": "cliente"
+    },
+    {
+        "name": "matheus",
+        "cpf": "08238539188",
+        "email": "matheus@gmail.com",
+        "pwd": "$2b$12$bmLAqtqx.VOr8Xf7dY16qu53b6.wbtG4aezc5lybEk5UTr.o3vIGG",
+        "type_user": "gerente"
+    },
+    {
+        "name": "rafaela",
+        "cpf": "08238539188",
+        "email": "rafaela@gmail.com",
+        "pwd": "$2b$12$UvNrKzS3FGZzDeDpn4N71OmaugTZWGTyb.y2jP25DJXi/NOGCIPrG",
+        "type_user": "entregador"
+    },
+    {
+        "name": "izabella",
+        "cpf": "08238539188",
+        "email": "izabella@gmail.com",
+        "pwd": "$2b$12$OW6XF.AP0hE1VKQqTFT5K.ysQB6CTt3bBoyvj6bsCDRHzEAfZRELC",
+        "type_user": "cliente"
+    },
+    {
+        "name": "julia",
+        "cpf": "48650954898",
+        "email": "julia@gmail.com",
+        "pwd": "$2b$12$iTF13ziF1dJd6KcQmYOfNeafH465mLZpvceGJE/1OdtiSidDPUmOS",
+        "type_user": "entregador"
+    },
+    {
+        "name": "julia",
+        "cpf": "48650954898",
+        "email": "julia@gmail.com",
+        "pwd": "$2b$12$AxGBfryahO9mgzhyWsrGH.wYySHNiC5i8A8sHRlGVpB1ah4dK7C6S",
+        "type_user": "deliveryman"
+    }
+]

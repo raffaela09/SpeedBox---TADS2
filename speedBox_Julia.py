@@ -20,21 +20,25 @@ class Transport(ABC):
         pass
     
 class Car(Transport):
-    
     def estimated_time(distance):
-        return distance / 100
-    
+        time_in_hours = distance / 100
+        time_in_min = time_in_hours*60
+        return time_in_min
     
 class Motorcycle(Transport):
-    
     def estimated_time(distance):
-        return distance / 80
+        time_in_hours = distance/80
+        time_in_min = time_in_hours*60
+        return time_in_min
+        
     
     
 class Bicycle(Transport):
     
     def estimated_time(distance):
-        return distance / 20
+        time_in_hours = distance / 20
+        time_in_min = time_in_hours*60
+        return time_in_min
         
 class Payment(ABC): 
     @abstractmethod
@@ -47,7 +51,7 @@ class Payment(ABC):
     
 class Credit(Payment):
     def confirm_payment(self):
-        pass
+        pass 
     def refund_payment(self):
         pass
     def payment_receipt(self):
@@ -99,14 +103,3 @@ class Order:
             "distance": distance,
             "status": "on hold" #em espera, ou seja aguardando o gerente aceitar o pedido, para que possa dar procedencia
         }  
-    def create(self):
-        pass
-    #deixei a criacao do pedido dentro de cliente, já que ele é responsavel por criar o pedido, o pedido n é criado sozinho
-    #aqui talvez seja a mesma coisa, mas talvez fique realmente aqui pra poder reutilizar
-    #ver o historico basicamente.
-    
-    #verificar esse update, ja que essa funcao vai ser mt importante pras demais coisas, pra atualizar status etc
-    def update(self):
-        pass
-    def delete(self):
-        pass

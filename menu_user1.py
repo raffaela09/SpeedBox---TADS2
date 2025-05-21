@@ -39,10 +39,7 @@ def login_user():
     return User.login(email,pwd)
     
 
-def cancel_inputs():
-    print("\n------- Cancel order --------")
-    confirm = input("Deseja concelar o pedido? (yes/no):").lower()
-    return confirm == "yes"
+
 
 def place_order_2(client):
     try:
