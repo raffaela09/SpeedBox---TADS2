@@ -2,9 +2,9 @@ import getpass
 import bcrypt
 from speedBox_izab3lla import User
 from Validations import validate_cpf, validate_email, validate_pwd
-from Exceptions import CodeAlreadyExisitError, NoProductsToDisplayError
+from models.Exceptions import CodeAlreadyExisitError, NoProductsToDisplayError
 from speedBox_Julia import Order
-from service import show_history
+from services.service import show_history
 
 def register_user():
     print("\n------- User Registration --------")
@@ -38,8 +38,6 @@ def login_user():
     #chama a funcao de login do usuario, que vai verificar
     return User.login(email,pwd)
     
-
-
 
 def place_order_2(client):
     try:

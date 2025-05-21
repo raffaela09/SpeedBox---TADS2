@@ -1,6 +1,6 @@
-from service import show_history
-from Exceptions import ProductNotFoundError, NoOrdersError
-from service import read
+from services.service import show_history
+from models.Exceptions import ProductNotFoundError, NoOrdersError
+from services.service import read
 
 def accept_order_manager_menu(manager):
     try:

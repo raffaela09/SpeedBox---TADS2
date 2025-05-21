@@ -1,7 +1,8 @@
 import uuid
-from service import load_orders, load_users, save_users, save_orders
+from services.service import load_orders, load_users, save_users, save_orders
 import bcrypt
-from Exceptions import PasswordInvalidError, CodeAlreadyExisitError
+from models.Exceptions import PasswordInvalidError, CodeAlreadyExisitError
+#separa em arquivos de classes, tipo arquivo de pessoa, arquivo de user, etc
 class Person:
     def __init__(self, name: str, cpf: str):
         self._name = name

@@ -1,5 +1,5 @@
 from speedBox_izab3lla import User
-from service import change_status, load_orders, update_json
+from services.service import change_status, load_orders, update_json
 from speedBox_Julia import Transport
 class DeliveryMan(User):
     def __init__(self, name, cpf, email, pwd, user_type):

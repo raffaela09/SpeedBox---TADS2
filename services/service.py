@@ -1,5 +1,5 @@
 #aqui deveria ser uma classe de service, mas eu teria que mudar todo o resto, e nao temos mais tempo
-from Exceptions import ProductNotFoundError, NoProductsToDisplayError, NoOrdersError
+from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, NoOrdersError
 import json
     
 # Implementing JSON to save the user
@@ -34,6 +34,7 @@ def update_json(update_orders, keys):
     for item in data:
         match = True
         
+        #tomar cuidado com isso, não é comum dessa forma
         for key in keys:
             if item.get(key) != update_orders.get(key):
                 match = False

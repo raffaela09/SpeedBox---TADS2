@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from service import load_orders
-#
+from services.service import load_orders
+#separa em arquivos de classes, tipo entrega, etc, eu pensei em tirar a classe entrega p facilitar p gente, pq n sei mt bem como integrar isso, de resto ta tudo otimo 
 class Delivery:
     def __init__(self, status: str, client, rider, pickup: str, destination: str, distance: int):
         self._status = status 
@@ -40,54 +40,7 @@ class Bicycle(Transport):
         time_in_min = time_in_hours*60
         return time_in_min
         
-class Payment(ABC): 
-    @abstractmethod
-    def confirm_payment(self):
-        pass
-    def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
-    
-class Credit(Payment):
-    def confirm_payment(self):
-        pass 
-    def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
-    def pay_in_installments(self):
-        pass
 
-class Debit(Payment):
-    def confirm_payment(self):
-        pass
-    def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
-
-class Pix(Payment):
-    def __init__(self, pix_key: str):
-        self._pix_key = pix_key
-    
-    def confirm_payment(self):
-        pass
-    def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
-
-class Cash(Payment):
-    def confirm_payment(self):
-        pass
-    def refund_payment(self):
-        pass
-    def payment_receipt(self):
-        pass 
-    def calculate_change(self):
-        pass
-  
  
 #fiz a associacao entre cliente e pedido, visto que Cliente pode TER um pedido, entao seria a relacao de associacao.
 class Order:

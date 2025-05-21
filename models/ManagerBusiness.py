@@ -1,5 +1,5 @@
 from speedBox_izab3lla import User
-from service import change_status
+from services.service import change_status
 class ManagerBusiness(User):
     def __init__(self, name, cpf, email, pwd, user_type):
         super().__init__(name, cpf, email, pwd, user_type)

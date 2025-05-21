@@ -1,5 +1,5 @@
 import re
-from Exceptions import InvalidateEmailError
+from models.Exceptions import InvalidateEmailError
 def validate_pwd(pwd):
     if len(pwd) < 6:
         print("The password must be at least 6 characters long.")

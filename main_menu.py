@@ -1,10 +1,10 @@
-from menu_user1 import register_user, login_user, options_user
+from menus.menu_user1 import register_user, login_user, options_user
 from speedBox_izab3lla import Client
-from ManagerBusiness import ManagerBusiness
-from DeliveryMan import DeliveryMan
-from menu_manager import options_manager
-from menu_deliveryman import options_deliveryman
-from service import show_history, load_users
+from models.ManagerBusiness import ManagerBusiness
+from models.DeliveryMan import DeliveryMan
+from menus.menu_manager import options_manager
+from menus.menu_deliveryman import options_deliveryman
+from services.service import load_users
 
 while True:
     print("\n--------Welcome!!---------\n")
