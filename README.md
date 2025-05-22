@@ -45,7 +45,7 @@ The system manages orders with unique codes, supports multiple payment methods, 
 Install the `bcrypt` library:
 ```bash
 pip install bcrypt
-````
+```
 
 2. Clone the repository:  
 Clone the project and access the folder:
