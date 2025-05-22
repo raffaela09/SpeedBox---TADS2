@@ -4,17 +4,17 @@ Delivery system with order management, developed with object-oriented structure.
 
 ## Index
 
-- [About](#about)
+- About
 
-- [Class Diagram](#class-diagram)
+- Class Diagram
 
-- [Features](#features)
+- Features
 
-- [Technologies](#technologies)
+- Technologies
 
-- [Installation](#installation)
+- Installation
 
-- [How to Use](#how-to-use)
+- How to Use
 
 ## 📑 About
 
@@ -43,16 +43,19 @@ The system manages orders with unique codes, supports multiple payment methods, 
 
 1. Download dependencies:  
 Install the `bcrypt` library:
-
-    pip install bcrypt
+```bash
+pip install bcrypt
+````
 
 2. Clone the repository:  
 Clone the project and access the folder:
-
-    git clone https://github.com/raffaela09/SpeedBox---TADS2.git
-    cd SpeedBox--TADS2
+```bash
+git clone https://github.com/raffaela09/SpeedBox---TADS2.git
+cd SpeedBox--TADS2
+```
 
 3. Run the application:  
 Execute the `main_menu.py` file with Python:
-
-    python main_menu.py
+```bash
+python main_menu.py
+```
