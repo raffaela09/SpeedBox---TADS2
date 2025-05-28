@@ -1,7 +1,10 @@
 from Service import Service
 from models.Exceptions import NoOrdersError, ProductNotFoundError, NoProductsToDisplayError
 class OrderService(Service):
+    def __init__(self, name_file):
+        super().__init__(name_file)
     #daqui pra baixo service do pedido
+    
     def show_informations(self, mensage, name_file):
         orders = self.load_data(name_file)
         found = False
@@ -12,9 +15,6 @@ class OrderService(Service):
                 break
         if not found:
             raise NoOrdersError(f"No orders in {mensage}.")
-
-
-
 
     def change_status(self, name_file, number_order, email_user, mensage_status_search, mensage_status_update, type_user_key):
         orders = self.load_data(name_file)

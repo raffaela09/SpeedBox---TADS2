@@ -12,3 +12,5 @@ class TransportInvalidError(Exception):
     pass
 class CodeAlreadyExisitError(Exception):
     pass
+class ItemNotFoundError(Exception):
+    pass

@@ -1,3 +1,4 @@
+from models.Exceptions import ItemNotFoundError
 import json 
 
 '''Classe de servico para facilitar a manutencao e manipulacao de dados do json'''
@@ -31,7 +32,7 @@ class Service:
     '''
     def update_json(self, update_data, keys):
         #utilizar esse json update para poder trocar de senha
-        data = self.load_data(self._name_file)
+        data = self.load_data()
         found = False 
         
         for item in data:
@@ -41,11 +42,13 @@ class Service:
                 break
             
         if not found:
-            raise FileNotFoundError('File not found.')
+            raise ItemNotFoundError("Item not found.")
         with open(self._name_file, "w") as file:
             json.dump(data, file, indent=4) 
    
-    '''deletar dados de dentro do json '''   
+    '''deletar dados de dentro do json, ele verifica de acordo com o id (email, ou codigo do pedido) se o item possuir o "id"
+    igual, ele adiciona a uma nova lista, e depois salva com o metodo "save_data", dessa forma, tirando o item que desejava excluir.
+    '''   
     def delete_datas(self, type_id, id_user):
         data = self.load_data()
         new_data = []
