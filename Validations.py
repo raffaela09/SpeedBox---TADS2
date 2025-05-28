@@ -1,4 +1,4 @@
-import re
+import re # estudar direitinho esse re aqui e explicar pra que serve, ja que ele ta perturbando por isso
 from models.Exceptions import InvalidateEmailError
 def validate_pwd(pwd):
     if len(pwd) < 6:

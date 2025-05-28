@@ -1,14 +1,20 @@
 #aqui deveria ser uma classe de service, mas eu teria que mudar todo o resto, e nao temos mais tempo
 from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, NoOrdersError
-import json
-    
-# Implementing JSON to save the user
-def load_users():#loads the existing users
-    try:
-        with open("users.json", "r") as file:
-            return json.load(file) 
-    except FileNotFoundError:
-        return [] 
+import json # responsavel por importar o json, pra que a gente possa fazer uso do nosso "banco de dados" (o json)
+
+
+class Service:
+    def __init__(self, name_file):
+        self.name_file = name_file
+     
+    '''metodo para carregar os dados dentro do json, basta passar o nome do arquivo que deseja carregar, nesse caso, ou orders, ou user'''  
+    def load_data(name_file):
+        try:
+            with open(name_file, "r") as file:
+                return json.load(file)
+        except FileNotFoundError:
+            return []
+
 
 
 def save_users(users): #saves in a list
@@ -25,7 +31,8 @@ def load_orders():
 def save_orders(orders):
     with open("orders.json", "w") as file:
         json.dump(orders, file, indent=4)
-        
+ 
+'''Funcao responsavel por atualizar o json, ser duplicar o pedido, entao ele carrega os dados (data),  '''       
 def update_json(update_orders, keys):
     data = load_orders()
     
@@ -34,7 +41,7 @@ def update_json(update_orders, keys):
     for item in data:
         match = True
         
-        #tomar cuidado com isso, não é comum dessa forma
+        #tomar cuidado com isso, não é comum dessa forma, posso fazer sem o get, e pq verificar a diferenca e n comparar a igualdade?
         for key in keys:
             if item.get(key) != update_orders.get(key):
                 match = False
@@ -47,8 +54,10 @@ def update_json(update_orders, keys):
         pass
         #lancar raise aqui
     with open("orders.json", "w") as file:
-        json.dump(data, file, indent=4)
-        
+        json.dump(data, file, indent=4) #explicar esse ident = 4
+   
+   
+'''funcao para ler algo de dentro do json'''     
 def read(msg):
         orders = load_orders()
         found = False
@@ -90,3 +99,7 @@ def show_history(type_user, email_user):
             break
     if not found:
         raise NoProductsToDisplayError("There are no orders to display.")
+ 
+'''deletar dados de dentro do json '''   
+def delete_data():
+    pass
