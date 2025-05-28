@@ -3,15 +3,15 @@ from models.Exceptions import NoOrdersError, ProductNotFoundError, NoProductsToD
 class OrderService(Service):
     #daqui pra baixo service do pedido
     def show_informations(self, mensage, name_file):
-                orders = self.load_data(name_file)
-                found = False
-                for order in orders:
-                    if order["status"] == mensage:
-                        print(f"ORDERS {mensage.upper()}:\nClient: {order["cliente"]}\nCode: {order["num_order"]}\nProduct: {order["name_product"]}\nDistance: {order["distance"]}")
-                        found = True
-                        break
-                if not found:
-                    raise NoOrdersError(f"No orders in {mensage}.")
+        orders = self.load_data(name_file)
+        found = False
+        for order in orders:
+            if order["status"] == mensage:
+                print(f"ORDERS {mensage.upper()}:\nClient: {order["cliente"]}\nCode: {order["num_order"]}\nProduct: {order["name_product"]}\nDistance: {order["distance"]}")
+                found = True
+                break
+        if not found:
+            raise NoOrdersError(f"No orders in {mensage}.")
 
 
 
