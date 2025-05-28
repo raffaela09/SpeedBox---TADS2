@@ -4,7 +4,7 @@ from models.ManagerBusiness import ManagerBusiness
 from models.DeliveryMan import DeliveryMan
 from menus.menu_manager import options_manager
 from menus.menu_deliveryman import options_deliveryman
-from services.service import load_users
+from services.Service import Service
 
 while True:
     print("\n--------Welcome!!---------\n")
@@ -15,11 +15,10 @@ while True:
         
     #opcao de fazer login
     elif option =="2":
-        users = load_users()
+        FILE_USER = Service("users.json")
+        users = FILE_USER.load_data()
         user_data = login_user()
-        #separei aqui pra ja chamar os menus de acordo com os clientes (tipo de cliente que ele digita no cadastro)
-        #verifica se os dados estao sendo retornados e o tipo do usuario pra passar o menu de cada usuario
-        #
+
         if user_data and user_data["type_user"] == "cliente":
                 client = Client(
                     name = user_data["name"],
@@ -29,11 +28,7 @@ while True:
                     user_type= user_data["type_user"],
                     orders= []
                 )
-                options_user(client)
-                #termina de implementar o restante aqui
-                
-        #num_order, email, user_type        
-        #minha parte         
+       
         elif user_data and user_data["type_user"] == "gerente":
             manager = ManagerBusiness(
                 name = user_data["name"],
