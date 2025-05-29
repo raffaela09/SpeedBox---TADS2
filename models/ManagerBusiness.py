@@ -1,5 +1,5 @@
 from speedBox_izab3lla import User
-from services.service import change_status
+from services.Service import Service
 class ManagerBusiness(User):
     def __init__(self, name, cpf, email, pwd, user_type):
         super().__init__(name, cpf, email, pwd, user_type)
@@ -8,7 +8,7 @@ class ManagerBusiness(User):
     caso esteja, ele chama a funcao de atualizar os dados do json, que passa o que vai ser atualizado e por qual chave ele deve procurar dentro do json para atulizar, caso contrario, ele levanta uma excecao.
     ''' 
     def schedule_delivery(self, num_order, email, user_type ):
-        change_status(
+        Service.change_status(
             number_order = num_order, 
             email_user = email,
             mensage_status_search = "on hold",
@@ -23,7 +23,7 @@ class ManagerBusiness(User):
     atualizados e por qual chave deve-se procurar dentro do json para que possa ser atualizado, caso contrario, ele levanta uma excecao
     '''             
     def refuse_delivery(self, num_order, email, user_type):
-       change_status(
+       Service.change_status(
            number_order = num_order,
            email_user = email,
            mensage_status_search = "on hold",
