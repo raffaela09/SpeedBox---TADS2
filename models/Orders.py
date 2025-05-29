@@ -8,4 +8,8 @@ class Order:
         code = randint(1000, 9999)
         return code
     
-    
+    def mensage_code(code):
+        print(f"Order placed successfully! Order code: {code}")
+        
+code = Order.random_code()        
+Order.mensage_code(code)
