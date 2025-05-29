@@ -1,10 +1,10 @@
-from services.service import show_history
+from services.OrderService import OrderService
 from models.Exceptions import ProductNotFoundError, NoOrdersError
-from services.service import read
+
 
 def accept_order_manager_menu(manager):
     try:
-        read("on hold")
+        OrderService.show_informations("on hold", "orders.json")
         code_manager = input("Type code of order: ")
         manager.schedule_delivery(
             num_order = code_manager, 
@@ -16,7 +16,7 @@ def accept_order_manager_menu(manager):
             
 def cancel_order_manager_menu(manager):
     try:
-        read("on hold")
+        OrderService.show_informations("on hold", "orders.json")
         code_manager = input("Type code of order: ")
         manager.refuse_delivery(
             num_order = code_manager,
@@ -37,6 +37,6 @@ def options_manager(manager):
         elif answer_manager == "2":
             cancel_order_manager_menu(manager)
         elif answer_manager == "3":
-            show_history(manager.user_type, manager.email)
+            OrderService.show_history(manager.user_type, manager.email)
         elif answer_manager == "4":
             break

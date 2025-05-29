@@ -1,5 +1,5 @@
 from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, TransportInvalidError,NoOrdersError
-from services.service import read, show_history
+from services.OrderService import OrderService
 from speedBox_Julia import Bicycle, Car, Motorcycle
 
 def chose_transport():
@@ -17,7 +17,7 @@ def chose_transport():
 
 def make_delivery_menu(deliveryman):
     try:
-        read("out for delivery")
+        OrderService.show_informations("out for delivery", "orders.json")
         code_deliveryman = input("Type code of order: ")
         deliveryman.make_delivery(
             num_order = code_deliveryman, 
@@ -28,7 +28,8 @@ def make_delivery_menu(deliveryman):
             
 def collect_delivery_menu(deliveryman):
     try:
-        read("awaiting pickup")
+        # read("awaiting pickup")
+        OrderService.show_informations("awaiting pickup", "orders.json")
         transport = chose_transport()
         code_deliveryman = input("Type code of order: ")
         deliveryman.collect_delivery(
@@ -52,6 +53,6 @@ def options_deliveryman(delivery_man):
         make_delivery_menu(delivery_man)
     elif answer_delivery_man == "3":
         try:
-            show_history(delivery_man.user_type, delivery_man.email)
+            OrderService.show_history(delivery_man.user_type, delivery_man.email)
         except NoProductsToDisplayError as error:
             print(error)

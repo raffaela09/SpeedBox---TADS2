@@ -1,9 +1,10 @@
-from menus.menu_user1 import register_user, login_user, options_user
+from menus.menu_user1 import register_user, login_user
 from speedBox_izab3lla import Client
 from models.ManagerBusiness import ManagerBusiness
 from models.DeliveryMan import DeliveryMan
 from menus.menu_manager import options_manager
 from menus.menu_deliveryman import options_deliveryman
+from menus.menu_client import options_user
 from services.Service import Service
 
 while True:
@@ -28,7 +29,7 @@ while True:
                     user_type= user_data["type_user"],
                     orders= []
                 )
-       
+                options_user(client)
         elif user_data and user_data["type_user"] == "gerente":
             manager = ManagerBusiness(
                 name = user_data["name"],

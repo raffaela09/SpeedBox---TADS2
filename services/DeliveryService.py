@@ -1,5 +1,6 @@
-from Service import Service
-from OrderService import OrderService
+from services.Service import Service
+from services.OrderService import OrderService
+from models.Exceptions import ItemNotFoundError
 
 class DeliveryService(Service):
     def __init__(self, name_file):
@@ -25,10 +26,12 @@ class DeliveryService(Service):
            mensage_status_update = "out for delivery",
            type_user_key = user_type
        )
-       orders = self.load_orders()
+       orders = self.load_data()
        for order in orders:
           if order['num_order'] == num_order:
             order['transport'] = transport.__name__
             order['estimated_time'] = transport.estimated_time(distance = order['distance'])
             self.update_json(order, ['code'])
             print(f'Time estimated: {order['estimated_time']}')
+       else:
+            raise ItemNotFoundError(f"Order with code {num_order} not found.")

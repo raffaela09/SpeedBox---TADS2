@@ -43,13 +43,12 @@ class Service:
             
         if not found:
             raise ItemNotFoundError("Item not found.")
-        with open(self._name_file, "w") as file:
-            json.dump(data, file, indent=4) 
+        self.save_data(data)
    
     '''deletar dados de dentro do json, ele verifica de acordo com o id (email, ou codigo do pedido) se o item possuir o "id"
     igual, ele adiciona a uma nova lista, e depois salva com o metodo "save_data", dessa forma, tirando o item que desejava excluir.
     '''   
-    def delete_datas(self, type_id, id_user):
+    def delete_data(self, type_id, id_user):
         data = self.load_data()
         new_data = []
         for item in data:
