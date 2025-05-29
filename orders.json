@@ -1,24 +1,13 @@
 [
     {
         "cliente": "rafaela@gmail.com",
-        "code": 4418,
-        "product": "",
-        "address_client": "",
-        "status": "on hold"
-    },
-    {
-        "cliente": "rafaela@gmail.com",
-        "code": 4875,
-        "product": "memoria ram",
-        "address_client": "rayldo de oliveira gomes, 1075",
-        "status": "on hold"
-    },
-    {
-        "cliente": "rafaela@gmail.com",
-        "code": 6736,
+        "code": 2620,
         "product": "processador",
-        "address_client": "rua rayldo de oliveira gomes, 1075",
+        "address_client": [
+            -51.676674,
+            -20.794953
+        ],
         "status": "on hold",
-        "date_time": "29/05/2025 13:52:14"
+        "date_time": "29/05/2025 15:12:26"
     }
 ]

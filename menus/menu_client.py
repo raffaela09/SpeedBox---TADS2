@@ -17,13 +17,12 @@ def place_order(client):
         
         #criacao das instancias da classe
         delivery_teste = Delivery(addres_client)
-        teste = delivery_teste.geocode(addres_client)
-        order = Order(client.email, code, product, addres_client, date_time)
+        addres_client_coords = delivery_teste.geocode(addres_client)
+        order = Order(client.email, code, product, addres_client_coords, date_time)
         #----------------------------
         
         date_dic_order = order.data_order_dic()
         client.request_delivery(date_dic_order)
-        print(teste)
         Order.message_code(code)
     except CodeAlreadyExisitError as error:
         print(error) #passar outro erro, ja que agora o sistema que gera o codigo

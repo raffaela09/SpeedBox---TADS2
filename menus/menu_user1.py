@@ -2,10 +2,6 @@ import getpass
 import bcrypt
 from speedBox_izab3lla import User
 from validations import validate_cpf, validate_email, validate_pwd
-from models.Exceptions import CodeAlreadyExisitError, NoProductsToDisplayError
-from services.OrderService import OrderService
-from models.Orders import Order
-from models.Delivery import Delivery
 
 #menu_usuario (fazer login e criar conta)
 def register_user():
