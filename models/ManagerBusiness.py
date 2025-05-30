@@ -1,5 +1,7 @@
 from speedBox_izab3lla import User
 from services.Service import Service
+from services.OrderService import OrderService
+from models.Exceptions import ItemNotFoundError
 class ManagerBusiness(User):
     def __init__(self, name, cpf, email, pwd, user_type):
         super().__init__(name, cpf, email, pwd, user_type)
@@ -7,14 +9,26 @@ class ManagerBusiness(User):
     '''funcao responsável por aceitar um pedido, irá verificar de acordo com o código do pedido se está no json e com o status correto (nesse caso, status de em espera),
     caso esteja, ele chama a funcao de atualizar os dados do json, que passa o que vai ser atualizado e por qual chave ele deve procurar dentro do json para atulizar, caso contrario, ele levanta uma excecao.
     ''' 
-    def schedule_delivery(self, num_order, email, user_type ):
-        Service.change_status(
+    def schedule_delivery(self, num_order, email, user_type, address_manager):
+        order_service = OrderService("orders.json")
+        order_service.change_status(
             number_order = num_order, 
             email_user = email,
             mensage_status_search = "on hold",
             mensage_status_update = "awaiting pickup",
             type_user_key = user_type
         )
+        orders = order_service.load_data()
+        for order in orders:
+            if order['code'] == num_order:
+                # order['estimated_time'] = transport.estimated_time(distance = order['distance'])
+                order['address_manager'] = address_manager
+                order["code"] = int(order["code"])
+                order_service.update_json(order, ['code'])
+                break
+
+        else:
+                raise ItemNotFoundError(f"Order with code {num_order} not found.")
     #-----------------------------------------------------------------------------------
     
     

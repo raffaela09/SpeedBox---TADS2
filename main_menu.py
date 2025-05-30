@@ -9,7 +9,7 @@ from services.Service import Service
 
 while True:
     print("\n--------Welcome!!---------\n")
-    print("1 - Create account.\n2 - Login.\n3 - Logout.\n")
+    print("1 - Create account.\n2 - Login.\n3 - Logout.\n") #trocar a ser
     option = input("Enter your option: ")
     if option == "1":
         register_user()

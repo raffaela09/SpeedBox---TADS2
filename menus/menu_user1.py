@@ -1,9 +1,9 @@
 import getpass
-import bcrypt
+import bcrypt  
 from speedBox_izab3lla import User
 from validations import validate_cpf, validate_email, validate_pwd
 
-#menu_usuario (fazer login e criar conta)
+#menu_usuari   (fazer login e criar conta)
 def register_user():
     print("\n------- User Registration --------")
     name = input("Name: ")

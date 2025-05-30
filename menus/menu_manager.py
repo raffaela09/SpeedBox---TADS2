@@ -1,22 +1,29 @@
 from services.OrderService import OrderService
 from models.Exceptions import ProductNotFoundError, NoOrdersError
+from models.Delivery import Delivery
 
 
 def accept_order_manager_menu(manager):
+    order_service = OrderService('orders.json')
     try:
-        OrderService.show_informations("on hold", "orders.json")
-        code_manager = input("Type code of order: ")
+        order_service.show_informations("on hold")
+        code_manager = int(input("Type code of order: "))
+        address_manager = input("Enter your address: ")
+        delivery_teste = Delivery(address_manager)
+        address_manager_coord = delivery_teste.geocode(address_manager)
         manager.schedule_delivery(
             num_order = code_manager, 
             email = manager.email, 
-            user_type = manager.user_type)
+            user_type = manager.user_type, address_manager = address_manager_coord),
+
     except (NoOrdersError, ProductNotFoundError ) as error:
         print(error)
 
             
 def cancel_order_manager_menu(manager):
+    order_service = OrderService('orders.json')
     try:
-        OrderService.show_informations("on hold", "orders.json")
+        order_service.show_informations("on hold", "orders.json")
         code_manager = input("Type code of order: ")
         manager.refuse_delivery(
             num_order = code_manager,

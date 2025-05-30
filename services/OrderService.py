@@ -3,14 +3,13 @@ from models.Exceptions import NoOrdersError, ProductNotFoundError, NoProductsToD
 class OrderService(Service):
     def __init__(self, name_file):
         super().__init__(name_file)
-    #daqui pra baixo service do pedido
     
     def show_informations(self, mensage):
         orders = self.load_data()
         found = False
         for order in orders:
             if order["status"] == mensage:
-                print(f"ORDERS {mensage.upper()}:\nClient: {order["cliente"]}\nCode: {order["num_order"]}\nProduct: {order["name_product"]}\nDistance: {order["distance"]}")
+                print(f"ORDERS {mensage.upper()}:\nClient: {order["cliente"]}\nCode: {order["code"]}\nProduct: {order["product"]}\n")
                 found = True
                 break
         if not found:
@@ -20,14 +19,14 @@ class OrderService(Service):
         orders = self.load_data()
         found = False
         for order in orders:
-            if number_order == order["code"] and order["status"] == mensage_status_search:
+            if int(number_order) == order["code"] and order["status"] == mensage_status_search:
                 self.update_json(
-                    update_orders = {
-                    "num_order": number_order,
+                    update_data = {
+                    "code": order["code"],
                     "status": mensage_status_update,
                     type_user_key: email_user
                     },
-                keys = ["num_order"]
+                keys = ["code"]
                 )
                 
                 found = True

@@ -1,6 +1,7 @@
 from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, TransportInvalidError,NoOrdersError
 from services.OrderService import OrderService
 from speedBox_Julia import Bicycle, Car, Motorcycle
+from models.Delivery import Delivery
 
 def chose_transport():
     transport = input('Enter the type of transportation you want to use (car, motorcycle, or bicycle): ')
@@ -16,8 +17,9 @@ def chose_transport():
         raise TransportInvalidError('Invalid transport option.')
 
 def make_delivery_menu(deliveryman):
+    order_service = OrderService("orders.json")
     try:
-        OrderService.show_informations("out for delivery", "orders.json")
+        order_service.show_informations("out for delivery")
         code_deliveryman = input("Type code of order: ")
         deliveryman.make_delivery(
             num_order = code_deliveryman, 
@@ -27,16 +29,20 @@ def make_delivery_menu(deliveryman):
             print(error)
             
 def collect_delivery_menu(deliveryman):
+    order_service = OrderService("orders.json")
     try:
-        # read("awaiting pickup")
-        OrderService.show_informations("awaiting pickup", "orders.json")
+        order_service.show_informations("awaiting pickup")
         transport = chose_transport()
-        code_deliveryman = input("Type code of order: ")
+        code_deliveryman = input("Enter code of order: ")
+        address_delivery_man = input("Enter your address: ")
+        delivery_teste = Delivery(address_delivery_man)
+        addres_delivery_man_coords = delivery_teste.geocode(address_delivery_man)
         deliveryman.collect_delivery(
                 num_order = code_deliveryman,
                 email = deliveryman.email,
                 user_type = deliveryman.user_type,
-                transport = transport
+                transport = transport,
+                address_delivery_man = addres_delivery_man_coords,
             )
         transport_instance = transport()
         deliveryman.transport = transport_instance
@@ -44,6 +50,7 @@ def collect_delivery_menu(deliveryman):
             print(error)
             
 def options_deliveryman(delivery_man):
+    order_service = OrderService("orders.json")
     print("\n--------DeliveryMan---------\n")
     print("\n1 - Pick up order.\n2 - Make a delivery.\n3 - Show history.\n4 - Logout\n")
     answer_delivery_man = input("Type your option: ")
@@ -53,6 +60,6 @@ def options_deliveryman(delivery_man):
         make_delivery_menu(delivery_man)
     elif answer_delivery_man == "3":
         try:
-            OrderService.show_history(delivery_man.user_type, delivery_man.email)
+            order_service.show_history(delivery_man.user_type, delivery_man.email)
         except NoProductsToDisplayError as error:
             print(error)
