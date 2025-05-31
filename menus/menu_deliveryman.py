@@ -30,10 +30,11 @@ def make_delivery_menu(deliveryman):
             
 def collect_delivery_menu(deliveryman):
     order_service = OrderService("orders.json")
+    json_load = order_service.load_data()
     try:
         order_service.show_informations("awaiting pickup")
         transport = chose_transport()
-        code_deliveryman = input("Enter code of order: ")
+        code_deliveryman = int(input("Enter code of order: "))
         address_delivery_man = input("Enter your address: ")
         delivery_teste = Delivery(address_delivery_man)
         addres_delivery_man_coords = delivery_teste.geocode(address_delivery_man)
@@ -44,6 +45,12 @@ def collect_delivery_menu(deliveryman):
                 transport = transport,
                 address_delivery_man = addres_delivery_man_coords,
             )
+        for item in json_load:
+            if item['code'] == code_deliveryman:
+    
+                print(item['address_client'])
+                distance_manager_client, time_manager_client = delivery_teste.distance_time(item['address_client'], item['address_manager'])
+                print(distance_manager_client, time_manager_client)
         transport_instance = transport()
         deliveryman.transport = transport_instance
     except (NoOrdersError, ProductNotFoundError, TransportInvalidError) as error:
