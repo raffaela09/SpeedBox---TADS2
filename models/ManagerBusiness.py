@@ -1,7 +1,6 @@
 from speedBox_izab3lla import User
-from services.Service import Service
 from services.OrderService import OrderService
-from models.Exceptions import ItemNotFoundError
+from models.Exceptions import ItemNotFoundError, ProductNotFoundError
 class ManagerBusiness(User):
     def __init__(self, name, cpf, email, pwd, user_type):
         super().__init__(name, cpf, email, pwd, user_type)
@@ -31,19 +30,22 @@ class ManagerBusiness(User):
                 raise ItemNotFoundError(f"Order with code {num_order} not found.")
     #-----------------------------------------------------------------------------------
     
-    
-    
     '''Funcao responsavel por cancelar um pedido, ela funciona da mesma forma que a anterior, verifica atravez do codigo do pedido se esta no json e com o status em espera, caso esteja, ele chama a funcao de atualizar os dados no json, que recebe os dados que vao ser
     atualizados e por qual chave deve-se procurar dentro do json para que possa ser atualizado, caso contrario, ele levanta uma excecao
     '''             
     def refuse_delivery(self, num_order, email, user_type):
-       Service.change_status(
-           number_order = num_order,
-           email_user = email,
-           mensage_status_search = "on hold",
-           mensage_status_update = "canceled",
-           type_user_key = user_type
-       )
+        try:
+            order_service = OrderService("orders.json")
+            order_service.change_status(
+                number_order = num_order,
+                email_user = email,
+                mensage_status_search = "on hold",
+                mensage_status_update = "canceled",
+                type_user_key = user_type
+            )
+            print('Order canceled.')
+        except ProductNotFoundError as error:
+            print(error)
     #-----------------------------------------------------------------------------------
             
 

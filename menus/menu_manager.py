@@ -2,7 +2,6 @@ from services.OrderService import OrderService
 from models.Exceptions import ProductNotFoundError, NoOrdersError
 from models.Delivery import Delivery
 
-
 def accept_order_manager_menu(manager):
     order_service = OrderService('orders.json')
     try:
@@ -18,13 +17,13 @@ def accept_order_manager_menu(manager):
 
     except (NoOrdersError, ProductNotFoundError ) as error:
         print(error)
-
+#-----------------------------------------------------------------------------------
             
 def cancel_order_manager_menu(manager):
     order_service = OrderService('orders.json')
     try:
-        order_service.show_informations("on hold", "orders.json")
-        code_manager = input("Type code of order: ")
+        order_service.show_informations("on hold")
+        code_manager = input("Enter code of order: ")
         manager.refuse_delivery(
             num_order = code_manager,
             email = manager.email,
@@ -32,6 +31,7 @@ def cancel_order_manager_menu(manager):
             )
     except (NoOrdersError, ProductNotFoundError) as error:
             print(error)
+#-----------------------------------------------------------------------------------
         
 def options_manager(manager):
     while True:
@@ -47,3 +47,4 @@ def options_manager(manager):
             OrderService.show_history(manager.user_type, manager.email)
         elif answer_manager == "4":
             break
+#-----------------------------------------------------------------------------------

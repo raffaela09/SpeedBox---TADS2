@@ -23,16 +23,14 @@ def place_order(client):
         
         date_dic_order = order.data_order_dic()
         client.request_delivery(date_dic_order)
-        Order.message_code(code)
+        order.message_code()
     except CodeAlreadyExisitError as error:
         print(error) #passar outro erro, ja que agora o sistema que gera o codigo
 #-------------------------------------
 
-#mostrar as opcoes do 
-#opcoes do usuario, como cliente       
+#mostrar as opcoes do cliente      
 def options_user(client):
-    order_service = OrderService("orders.json")
-    
+    order_service = OrderService("orders.json") 
     while True:
         print("1 - Place Order\n2 - Show history.\n3 - Logout.")
         answer_client = input("Enter your option: ")

@@ -1,19 +1,18 @@
 import re # estudar direitinho esse re aqui e explicar pra que serve, ja que ele ta perturbando por isso
-from models.Exceptions import InvalidateEmailError
+from models.Exceptions import InvalidEmailError, PasswordInvalidError, CpfInvalidError
+
 def validate_pwd(pwd):
     if len(pwd) < 6:
-        print("The password must be at least 6 characters long.")
-        return False #passar raise aqui
+        raise PasswordInvalidError("The password must be at least 6 characters long.")
     
 def validate_cpf(cpf):
     if len(cpf) != 11 or len(set(cpf)) == 1:# Checks if it has a number different from 11 digits
 # or if all the digits are the same
-        print("Invalid CPF!")
-        return False #raise 
+        raise CpfInvalidError("Invalid CPF!")
 
 def validate_email(email):
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     if re.match(pattern, email):
         return True
     else:
-        raise InvalidateEmailError("Invalid email format.")
+        raise InvalidEmailError("Invalid email format.")

@@ -2,6 +2,7 @@ import getpass
 import bcrypt  
 from speedBox_izab3lla import User
 from validations import validate_cpf, validate_email, validate_pwd
+from models.Exceptions import PasswordOrEmailInvalidError
 
 #menu_usuari   (fazer login e criar conta)
 def register_user():
@@ -29,9 +30,12 @@ def register_user():
     User.create_account(user_to_dict)
 
 def login_user():
-    print("\n------- User Login --------")
-    email = input("Email: ")
-    pwd = getpass.getpass("Password: ")
-    
-    #chama a funcao de login do usuario, que vai verificar
-    return User.login(email,pwd)
+    try:
+        print("\n------- User Login --------")
+        email = input("Email: ")
+        pwd = getpass.getpass("Password: ")
+        
+        #chama a funcao de login do usuario, que vai verificar
+        return User.login(email,pwd)
+    except PasswordOrEmailInvalidError as error:
+        print(error)

@@ -1,7 +1,7 @@
-from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, TransportInvalidError,NoOrdersError
-from services.OrderService import OrderService
+from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, TransportInvalidError,NoOrdersError, ItemNotFoundError
 from speedBox_Julia import Bicycle, Car, Motorcycle
 from models.Delivery import Delivery
+from services.OrderService import OrderService
 
 def chose_transport():
     transport = input('Enter the type of transportation you want to use (car, motorcycle, or bicycle): ')
@@ -14,8 +14,10 @@ def chose_transport():
     elif transport == 'bicycle':
         return Bicycle
     else:
-        raise TransportInvalidError('Invalid transport option.')
-
+        raise TransportInvalidError('Inválid transport option.')
+#-----------------------------------------------------------------------------------
+   
+'''Funcao para mostrar os inputs ao marcar o pedido como entregue'''
 def make_delivery_menu(deliveryman):
     order_service = OrderService("orders.json")
     try:
@@ -27,7 +29,9 @@ def make_delivery_menu(deliveryman):
             user_type = deliveryman.user_type)
     except (ProductNotFoundError, NoOrdersError) as error:
             print(error)
-            
+#-----------------------------------------------------------------------------------
+
+'''Funcao para exibir os input e transferir os dados para o service ao coletar o pedido.'''          
 def collect_delivery_menu(deliveryman):
     order_service = OrderService("orders.json")
     json_load = order_service.load_data()
@@ -55,18 +59,33 @@ def collect_delivery_menu(deliveryman):
         deliveryman.transport = transport_instance
     except (NoOrdersError, ProductNotFoundError, TransportInvalidError) as error:
             print(error)
-            
+#-----------------------------------------------------------------------------------
+ 
+'''Funcao para exibir as opcoes do entregador no menu principal.'''           
 def options_deliveryman(delivery_man):
     order_service = OrderService("orders.json")
-    print("\n--------DeliveryMan---------\n")
-    print("\n1 - Pick up order.\n2 - Make a delivery.\n3 - Show history.\n4 - Logout\n")
-    answer_delivery_man = input("Type your option: ")
-    if answer_delivery_man == "1":
-        collect_delivery_menu(delivery_man)
-    elif answer_delivery_man == "2":
-        make_delivery_menu(delivery_man)
-    elif answer_delivery_man == "3":
-        try:
-            order_service.show_history(delivery_man.user_type, delivery_man.email)
-        except NoProductsToDisplayError as error:
-            print(error)
+    while True:
+        print("\n--------DeliveryMan---------\n")
+        print("\n1 - Pick up order.\n2 - Make a delivery.\n3 - Show history.\n4 - Logout\n")
+        
+        answer_delivery_man = input("Type your option: ")
+        
+        if answer_delivery_man == "1":
+            try:
+                collect_delivery_menu(delivery_man)
+            except ItemNotFoundError as error:
+                print(error)
+        elif answer_delivery_man == "2":
+            try:
+                make_delivery_menu(delivery_man)
+            except ProductNotFoundError as error:
+                print(error)
+        elif answer_delivery_man == "3":
+            try:
+                order_service.show_history(delivery_man.user_type, delivery_man.email)
+            except NoProductsToDisplayError as error:
+                    print(error)
+        elif answer_delivery_man == '4':
+            print("See you soon!")
+            break
+#-----------------------------------------------------------------------------------

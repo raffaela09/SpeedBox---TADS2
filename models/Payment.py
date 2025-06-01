@@ -74,7 +74,7 @@ class Pix(Payment):
         self.confirmed = True
         return ("Pagamento confirmado.")
     def refund_payment(self):
-        if not self.confirmed:
+        if not self.consssfirmed:
             return ("Pagamento não confirmado.")
         if self.refunded:
             return ("Pagamento já estornado.")

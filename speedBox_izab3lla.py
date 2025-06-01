@@ -1,7 +1,7 @@
 import uuid
 from services.Service import Service
 import bcrypt
-from models.Exceptions import PasswordInvalidError, CodeAlreadyExisitError
+from models.Exceptions import PasswordOrEmailInvalidError
 Service_User = Service("users.json")
 Service_orders = Service("orders.json")
 class Person:
@@ -72,8 +72,8 @@ class User(Person):
                     if bcrypt.checkpw(pwd.encode('utf-8'), hashed_pwd): #Compara a senha digitada
                         print(f"Email confirmed! Welcome {user["name"].upper()}!")
                         return user 
-                    else:
-                        raise PasswordInvalidError("Incorrect password")
+            else:
+                raise PasswordOrEmailInvalidError("\nIncorrect e-mail or password!")
 
     def create_account(user_dict):
         users = Service_User.load_data()  #carrega todos os usuarios que estao dentro do json
