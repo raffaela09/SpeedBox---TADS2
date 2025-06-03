@@ -14,6 +14,7 @@ def accept_order_manager_menu(manager):
             num_order = code_manager, 
             email = manager.email, 
             user_type = manager.user_type, address_manager = address_manager_coord),
+        print('Order accepted!')
     except (NoOrdersError, ProductNotFoundError ) as error:
         print(error)
 #-----------------------------------------------------------------------------------
@@ -28,11 +29,13 @@ def cancel_order_manager_menu(manager):
             email = manager.email,
             user_type = manager.user_type
             )
+        print('Order canceled!')
     except (NoOrdersError, ProductNotFoundError) as error:
             print(error)
 #-----------------------------------------------------------------------------------
         
 def options_manager(manager):
+    order_service = OrderService('orders.json')
     while True:
         print("\n--------Manager---------\n")
         print("\n1 - Accept order.\n2 - Refuse order.\n3 - Show history\n4 - Logout\n")
@@ -43,7 +46,7 @@ def options_manager(manager):
         elif answer_manager == "2":
             cancel_order_manager_menu(manager)
         elif answer_manager == "3":
-            OrderService.show_history(manager.user_type, manager.email)
+            order_service.show_history(manager.user_type, manager.email)
         elif answer_manager == "4":
             break
 #-----------------------------------------------------------------------------------

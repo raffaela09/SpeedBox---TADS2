@@ -54,12 +54,12 @@ class Delivery:
 
    
     #dividir isso aqui em dois metodos, um calcula o tempo e outro a distancia.
-    def distance_time(self, pickup, destination):
+    def distance_time(self, pickup, destination, transport):
     #ja com directions é possivel fazer o calculo que precisamento, ou seja, o geo é um caminho que 
     #precisamos seguir para conseguir a distancia e a duração
         route = self.client.directions(
             coordinates=[pickup, destination],
-            profile='driving-car', #passar isso aqui com base no transporte escolhido pelo entregador, mexer nas classes pra retornar pro 
+            profile= transport.type_transport(), #passar isso aqui com base no transporte escolhido pelo entregador, mexer nas classes pra retornar pro 
             format='geojson'
         )
 

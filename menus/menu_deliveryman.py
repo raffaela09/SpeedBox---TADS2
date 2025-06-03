@@ -53,9 +53,9 @@ def collect_delivery_menu(deliveryman):
             if item['code'] == code_deliveryman:
     
                 print(item['address_client'])
-                distance_manager_client, time_manager_client = delivery_teste.distance_time(item['address_client'], item['address_manager'])
+                distance_manager_client, time_manager_client = delivery_teste.distance_time(item['address_client'], item['address_manager'], transport)
                 print(distance_manager_client, time_manager_client)
-        transport_instance = transport()
+        transport_instance = transport
         deliveryman.transport = transport_instance
     except (NoOrdersError, ProductNotFoundError, TransportInvalidError) as error:
             print(error)

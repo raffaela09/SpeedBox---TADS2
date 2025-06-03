@@ -35,7 +35,7 @@ def login_user():
     user_service = UserService('users.json')
     try:
         print("\n------- User Login --------")
-        email = input("Email: ")
+        email = input("Email: ").strip().lower()
         pwd = getpass.getpass("Password: ")
         
         #chama a funcao de login do usuario, que vai verificar

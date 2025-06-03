@@ -24,8 +24,7 @@ class ManagerBusiness(User):
                 order['address_manager'] = address_manager
                 order["code"] = int(order["code"])
                 order_service.update_json(order, ['code'])
-                break
-
+                break 
         else:
                 raise ItemNotFoundError(f"Order with code {num_order} not found.")
     #-----------------------------------------------------------------------------------

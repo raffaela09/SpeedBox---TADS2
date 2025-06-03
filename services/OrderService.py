@@ -11,7 +11,6 @@ class OrderService(Service):
             if order["status"] == mensage:
                 print(f"ORDERS {mensage.upper()}:\nClient: {order["cliente"]}\nCode: {order["code"]}\nProduct: {order["product"]}\n")
                 found = True
-                break
         if not found:
             raise NoOrdersError(f"No orders in {mensage}.")
 

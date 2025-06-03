@@ -3,7 +3,7 @@ from services.OrderService import OrderService
 from services.ClientService import ClientService
 from models.Orders import Order
 from models.Delivery import Delivery
-from models.Payment import Payment, Cash, Credit, Debit, Pix
+from models.Payment import Cash, Credit, Debit, Pix
 
 '''Funcao para escolher o pagamento, caso deseje pagar no app'''
 def chose_payment(value):

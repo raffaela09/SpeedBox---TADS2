@@ -1,34 +1,28 @@
 [
     {
         "cliente": "rafaela@gmail.com",
-        "code": 1254,
-        "product": "flor",
-        "address_client": [
-            -51.676674,
-            -20.794953
-        ],
-        "status": "on hold",
-        "date_time": "03/06/2025 15:51:33",
-        "payment": {
-            "method": "credit",
-            "value": 10.0,
-            "status": "paid"
-        }
-    },
-    {
-        "cliente": "rafaela@gmail.com",
-        "code": 3166,
+        "code": 2008,
         "product": "gabinete",
         "address_client": [
             -51.676674,
             -20.794953
         ],
-        "status": "on hold",
-        "date_time": "03/06/2025 16:47:10",
+        "status": "out for delivery",
+        "date_time": "03/06/2025 18:32:56",
         "payment": {
             "method": "credit",
-            "value": 10.0,
+            "value": 30.0,
             "status": "paid"
-        }
+        },
+        "gerente": "rafaela09@gmail.com",
+        "address_manager": [
+            -51.704595,
+            -20.790108
+        ],
+        "entregador": "matheus@gmail.com",
+        "address_delivery_man": [
+            -51.690639,
+            -20.78999
+        ]
     }
 ]
