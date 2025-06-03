@@ -59,7 +59,7 @@ class Delivery:
     #precisamos seguir para conseguir a distancia e a duração
         route = self.client.directions(
             coordinates=[pickup, destination],
-            profile='driving-car', #passar isso aqui com base no transporte escolhido pelo entregador 
+            profile='driving-car', #passar isso aqui com base no transporte escolhido pelo entregador, mexer nas classes pra retornar pro 
             format='geojson'
         )
 

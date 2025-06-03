@@ -1,4 +1,4 @@
-from speedBox_izab3lla import User
+from models.User import User
 from services.OrderService import OrderService
 from models.Exceptions import ItemNotFoundError, ProductNotFoundError
 class ManagerBusiness(User):

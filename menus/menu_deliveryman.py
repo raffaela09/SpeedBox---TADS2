@@ -1,18 +1,18 @@
 from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, TransportInvalidError,NoOrdersError, ItemNotFoundError
-from speedBox_Julia import Bicycle, Car, Motorcycle
+from models.Transport import Bicycle, Car, Motorcycle
 from models.Delivery import Delivery
 from services.OrderService import OrderService
 
 def chose_transport():
     transport = input('Enter the type of transportation you want to use (car, motorcycle, or bicycle): ')
     if transport == 'car':
-        return Car
+        return Car()
     
     elif transport == 'motorcycle':
-        return Motorcycle
+        return Motorcycle()
     
     elif transport == 'bicycle':
-        return Bicycle
+        return Bicycle()
     else:
         raise TransportInvalidError('Inválid transport option.')
 #-----------------------------------------------------------------------------------

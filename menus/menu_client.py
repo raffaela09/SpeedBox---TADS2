@@ -1,5 +1,6 @@
 from models.Exceptions import CodeAlreadyExisitError, NoProductsToDisplayError
 from services.OrderService import OrderService
+from services.ClientService import ClientService
 from models.Orders import Order
 from models.Delivery import Delivery
 from models.Payment import Payment, Cash, Credit, Debit, Pix
@@ -47,13 +48,14 @@ def create_order(client_email, product, address_client, payment_method):
 
 '''Funcao para fazer o pedido'''
 def place_order(client, product, address_client, pay_on_delivery, payment_method):
+    client_service = ClientService('orders.json')
     try:
         order = create_order(client.email, product, address_client, payment_method)
         if pay_on_delivery == 'y':
-            client.request_delivery(order.data_order_dic())
+            client_service.request_delivery(order.data_order_dic())
             order.message_code()
         elif pay_on_delivery == 'n':
-            client.request_delivery(order.data_order_dic())
+            client_service.request_delivery(order.data_order_dic())
             order.message_code()
         else:
             print('Inválid option for payment.')

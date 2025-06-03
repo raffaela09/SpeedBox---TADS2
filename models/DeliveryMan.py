@@ -1,6 +1,6 @@
-from speedBox_izab3lla import User
+from models.User import User
 from services.OrderService import OrderService
-from speedBox_Julia import Transport
+from models.Transport import Transport
 from services.DeliveryService import DeliveryService
 class DeliveryMan(User):
     def __init__(self, name, cpf, email, pwd, user_type):

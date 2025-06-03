@@ -14,5 +14,21 @@
             "value": 10.0,
             "status": "paid"
         }
+    },
+    {
+        "cliente": "rafaela@gmail.com",
+        "code": 3166,
+        "product": "gabinete",
+        "address_client": [
+            -51.676674,
+            -20.794953
+        ],
+        "status": "on hold",
+        "date_time": "03/06/2025 16:47:10",
+        "payment": {
+            "method": "credit",
+            "value": 10.0,
+            "status": "paid"
+        }
     }
 ]
