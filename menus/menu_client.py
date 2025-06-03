@@ -23,6 +23,7 @@ def chose_payment(value):
         #arrumar isso
         print('Inválid option.')
         return None
+#-----------------------------------------------------------------------------------
         
 def input_place_order():
     try:
@@ -38,6 +39,7 @@ def input_place_order():
     #arruma esse erro aqui, pra fazer o raise em algum canto e subir o erro mas sem parar o codigo.
     except ValueError:
         print("Inválid input for value. Please enter a number.")
+#-----------------------------------------------------------------------------------
     
 def create_order(client_email, product, address_client, payment_method):
     code = Order.random_code() #chama a funcao de gerar o código aleatório do pedido
@@ -45,6 +47,7 @@ def create_order(client_email, product, address_client, payment_method):
     delivery_teste = Delivery(address_client)
     addres_client_coords = delivery_teste.geocode(address_client)
     return Order(client_email, code, product, addres_client_coords, date_time, payment_method)
+#-----------------------------------------------------------------------------------
 
 '''Funcao para fazer o pedido'''
 def place_order(client, product, address_client, pay_on_delivery, payment_method):
@@ -55,14 +58,15 @@ def place_order(client, product, address_client, pay_on_delivery, payment_method
             client_service.request_delivery(order.data_order_dic())
             order.message_code()
         elif pay_on_delivery == 'n':
+            order.payment['status'] = 'paid'
             client_service.request_delivery(order.data_order_dic())
             order.message_code()
         else:
             print('Inválid option for payment.')
             
     except CodeAlreadyExisitError as error:
-        print(error) #passar outro erro, ja que agora o sistema que gera o codigo
-#-------------------------------------
+        print(error) #passar outro erro, ja que agora o sistema que gera o codigo 
+#-----------------------------------------------------------------------------------
 
 #mostrar as opcoes do cliente      
 def options_user(client):
@@ -89,4 +93,4 @@ def options_user(client):
             break
         else:
             print('Inválid Option.')
-#-------------------------------------
+#-----------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ class DeliveryMan(User):
         
     #-----------------------------------------------------------------------------------
 
-    def collect_delivery(self, num_order, email, user_type, transport, address_delivery_man):
+    def collect_delivery(self, num_order, email, user_type, transport, address_delivery_man, estimated_time, km):
        service = DeliveryService("orders.json")
-       service.collect_delivery(num_order, email, user_type, transport, address_delivery_man)
+       service.collect_delivery(num_order, email, user_type, transport, address_delivery_man, estimated_time, km)
     #-----------------------------------------------------------------------------------

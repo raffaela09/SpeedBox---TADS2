@@ -3,6 +3,8 @@ from models.Transport import Bicycle, Car, Motorcycle
 from models.Delivery import Delivery
 from services.OrderService import OrderService
 
+
+'''Funcao para escolher o transporte do entregador e retornar o profile de acordo com o directions da api (openrouteservice)'''
 def chose_transport():
     transport = input('Enter the type of transportation you want to use (car, motorcycle, or bicycle): ')
     if transport == 'car':
@@ -27,6 +29,7 @@ def make_delivery_menu(deliveryman):
             num_order = code_deliveryman, 
             email = deliveryman.email, 
             user_type = deliveryman.user_type)
+        print('Order delivered.')
     except (ProductNotFoundError, NoOrdersError) as error:
             print(error)
 #-----------------------------------------------------------------------------------
@@ -42,19 +45,24 @@ def collect_delivery_menu(deliveryman):
         address_delivery_man = input("Enter your address: ")
         delivery_teste = Delivery(address_delivery_man)
         addres_delivery_man_coords = delivery_teste.geocode(address_delivery_man)
+        for item in json_load:
+            if item['code'] == code_deliveryman:
+                distance_manager_client, time_manager_client = delivery_teste.distance_time(item['address_client'], item['address_manager'], transport)
+                distance_delivery_man_manager, time_delivery_man_manager = delivery_teste.distance_time(addres_delivery_man_coords, item['address_manager'], transport)
+                distance = distance_delivery_man_manager + distance_manager_client
+                time = time_delivery_man_manager + time_manager_client                
+                print(f'Distance: {distance}\nEstimated time: {time}')
         deliveryman.collect_delivery(
                 num_order = code_deliveryman,
                 email = deliveryman.email,
                 user_type = deliveryman.user_type,
                 transport = transport,
                 address_delivery_man = addres_delivery_man_coords,
+                estimated_time = time,
+                km = distance
+             
             )
-        for item in json_load:
-            if item['code'] == code_deliveryman:
-    
-                print(item['address_client'])
-                distance_manager_client, time_manager_client = delivery_teste.distance_time(item['address_client'], item['address_manager'], transport)
-                print(distance_manager_client, time_manager_client)
+        
         transport_instance = transport
         deliveryman.transport = transport_instance
     except (NoOrdersError, ProductNotFoundError, TransportInvalidError) as error:

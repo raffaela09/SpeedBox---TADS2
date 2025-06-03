@@ -46,7 +46,7 @@ class Credit(Payment):
         return {
             'method': 'credit',
             'value': self.value,
-            'status': 'paid'
+            'status': 'awaiting'
         }
 
 class Debit(Payment):
@@ -73,7 +73,7 @@ class Debit(Payment):
         return {
             'method': 'debit',
             'value': self.value,
-            'status': 'paid'
+            'status': 'awaiting'
         }
 
 class Pix(Payment):
@@ -104,7 +104,7 @@ class Pix(Payment):
         return {
             'method': 'pix',
             'value': self.value,
-            'status': 'paid'
+            'status': 'awaiting'
         }
 
 class Cash(Payment):
@@ -124,5 +124,5 @@ class Cash(Payment):
         return {
             'method': 'cash',
             'value': self.value,
-            'status': 'paid'
+            'status': 'awaiting'
         }
