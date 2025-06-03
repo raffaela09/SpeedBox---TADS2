@@ -70,7 +70,7 @@ class User(Person):
             if user ["email"] == email:
                     hashed_pwd = user["pwd"].encode('utf-8') # Pega o hash da senha armazenada e codifica para bytes
                     if bcrypt.checkpw(pwd.encode('utf-8'), hashed_pwd): #Compara a senha digitada
-                        print(f"Email confirmed! Welcome {user["name"].upper()}!")
+                        print(f"\nEmail confirmed! Welcome {user["name"].upper()}!\n")
                         return user 
             else:
                 raise PasswordOrEmailInvalidError("\nIncorrect e-mail or password!")
@@ -79,7 +79,7 @@ class User(Person):
         users = Service_User.load_data()  #carrega todos os usuarios que estao dentro do json
         users.append(user_dict)# Adds the user to the list
         Service_User.save_data(users) # Saves to the JSON file 
-        print("Registration successful!")
+        print("\nRegistration successful!\n")
 
     def user_dic(self, name, cpf, email, pwd, user_type): #creating the dictionary for the json
       return {
@@ -105,22 +105,3 @@ class Client(User):
         orders.append(place_order)
         #salva os pedidos no json, utilizando da classe Service
         Service_orders.save_data(orders)
-       
-        
-     
-
-    # def receive_delivery(self):
-    #     received_confirmation = received()
-    #     if self.status == "on route": # Checks if the status is "on route"
-    #         if received_confirmation:# if so, confirms it
-    #             print("Order delivered!") # Otherwise, the status will be "confirmed"
-    #     else:
-    #         print("Order canceled!")
-
-    # def cancel_order(self):
-    #     confirm = cancel_input()  # calling function created in the inputs page
-    #     if self.status == "canceled":  # check if the order has already been canceled
-    #         print("Order already canceled.")
-    #     elif confirm:
-    #         self.status = "canceled"  # if not canceled, confirm and cancel the order
-    #         print("Order canceled successfully.")

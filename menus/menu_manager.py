@@ -14,7 +14,6 @@ def accept_order_manager_menu(manager):
             num_order = code_manager, 
             email = manager.email, 
             user_type = manager.user_type, address_manager = address_manager_coord),
-
     except (NoOrdersError, ProductNotFoundError ) as error:
         print(error)
 #-----------------------------------------------------------------------------------

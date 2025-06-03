@@ -1,4 +1,4 @@
-import re # estudar direitinho esse re aqui e explicar pra que serve, ja que ele ta perturbando por isso
+import re 
 from models.Exceptions import InvalidEmailError, PasswordInvalidError, CpfInvalidError
 
 def validate_pwd(pwd):
@@ -8,7 +8,7 @@ def validate_pwd(pwd):
 def validate_cpf(cpf):
     if len(cpf) != 11 or len(set(cpf)) == 1:# Checks if it has a number different from 11 digits
 # or if all the digits are the same
-        raise CpfInvalidError("Invalid CPF!")
+        raise CpfInvalidError("Invalid CPF!") #lancei o raise pra caso estiver errado ele nao permitir a continuacao do cadastro
 
 def validate_email(email):
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'

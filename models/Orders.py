@@ -1,12 +1,14 @@
 from random import randint
 import datetime
+from models.Payment import Payment
 class Order:
-    def __init__(self, email_client, code, product, address_client, date_and_time):
+    def __init__(self, email_client, code, product, address_client, date_and_time, payment = None):
         self._email_client = email_client
         self._code = self.random_code()
         self._product = product
         self._address_client = address_client
         self._date_and_time = self.date_time()
+        self._payment = payment
     #---------------------------------- 
     
     #propertys
@@ -40,6 +42,12 @@ class Order:
     @date_and_time.setter
     def date_and_time(self, value):
         self._date_and_time = value
+    @property
+    def payment(self):
+        return self._payment
+    @payment.setter
+    def payment(self, value):
+        self._payment = value
     #---------------------------------- 
      
     '''Funcao para gerar um numero aleatório com 4 algarismos, para isso foi utilizada a biblioteca Random, e para gerar o numero, utilizei randint, passando de 1000 a 9999, para assim gerar o codigo com 4 algarismos'''
@@ -52,7 +60,7 @@ class Order:
     '''Para mostrar uma mensagem ao usuario (cliente) ao concluir seu pedido'''
      #por nao usar self, nem algum atributo de objeto, sendo assim, utilizamos staticmethod
     def message_code(self):
-        print(f"Order placed successfully! Order code: {self.code}")
+        print(f"Order placed successfully!\nOrder code: {self.code}")
     #---------------------------------- 
     
     '''Funcao para pegar a data e hora do momento, para que possa armazenar no pedido, utilizei a classe datetime, e formatei a data para uma string'''
@@ -73,6 +81,10 @@ class Order:
             'product': self.product,
             'address_client': self.address_client,
             'status' : 'on hold',
-            'date_time': self.date_and_time
+            'date_time': self.date_and_time,
+    'payment': self.payment.payment_dict() if self.payment else {
+        'status': 'pending',
+        'method': None #nada foi escolhido ainda, portanto expressa ausencia de valor 
+    }
         }
     #---------------------------------- 

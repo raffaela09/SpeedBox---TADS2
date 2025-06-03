@@ -39,8 +39,15 @@ class Credit(Payment):
     def pay_in_installments(self, installments = 2):
         if installments < 1:
             return ("Número de parcelas inválido")
+        else:
             value_per_installments = self.value / installments
             return ("{installments}x de {value_per_installments} no cartão.")
+    def payment_dict(self):
+        return {
+            'method': 'credit',
+            'value': self.value,
+            'status': 'paid'
+        }
 
 class Debit(Payment):
     def confirm_payment(self, value: float):
@@ -62,10 +69,16 @@ class Debit(Payment):
             f"Data: {self.payment_date}\n"
             "Status: Confirmado"
         ) 
+    def payment_dict(self):
+        return {
+            'method': 'debit',
+            'value': self.value,
+            'status': 'paid'
+        }
 
 class Pix(Payment):
-    def __init__(self, value: float, pix_key: str):
-        self._pix_key = pix_key
+    def __init__(self, value: float):
+
         self.value = value
         self.confirmed = True
         self.payment_date = datetime.now()
@@ -87,6 +100,12 @@ class Pix(Payment):
             f"Data: {self.payment_date}\n"
             "Status: Confirmado"
         ) 
+    def payment_dict(self):
+        return {
+            'method': 'pix',
+            'value': self.value,
+            'status': 'paid'
+        }
 
 class Cash(Payment):
     def confirm_payment(self):
@@ -101,4 +120,9 @@ class Cash(Payment):
         return ("Pagamento estornado com sucesso.") 
     def calculate_change(self):
         pass
-  
+    def payment_dict(self):
+        return {
+            'method': 'cash',
+            'value': self.value,
+            'status': 'paid'
+        }

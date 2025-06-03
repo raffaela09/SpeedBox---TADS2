@@ -1,57 +1,18 @@
 [
     {
         "cliente": "rafaela@gmail.com",
-        "code": 6338,
+        "code": 1254,
         "product": "flor",
         "address_client": [
             -51.676674,
             -20.794953
         ],
-        "status": "order deliveried",
-        "date_time": "31/05/2025 01:23:27",
-        "gerente": "rafaela09@gmail.com",
-        "address_manager": [
-            -51.690639,
-            -20.78999
-        ],
-        "entregador": "matheus@gmail.com",
-        "address_delivery_man": [
-            -51.704595,
-            -20.790108
-        ]
-    },
-    {
-        "cliente": "rafaela@gmail.com",
-        "code": 5052,
-        "product": "processadir",
-        "address_client": [
-            -51.704595,
-            -20.790108
-        ],
-        "status": "canceled",
-        "date_time": "31/05/2025 14:40:41",
-        "gerente": "rafaela09@gmail.com"
-    },
-    {
-        "cliente": "rafaela@gmail.com",
-        "code": 6190,
-        "product": "mousepad",
-        "address_client": [
-            -51.676674,
-            -20.794953
-        ],
         "status": "on hold",
-        "date_time": "01/06/2025 17:22:41"
-    },
-    {
-        "cliente": "rafaela@gmail.com",
-        "code": 1274,
-        "product": "mousepad",
-        "address_client": [
-            -51.676674,
-            -20.794953
-        ],
-        "status": "on hold",
-        "date_time": "01/06/2025 17:25:02"
+        "date_time": "03/06/2025 15:51:33",
+        "payment": {
+            "method": "credit",
+            "value": 10.0,
+            "status": "paid"
+        }
     }
 ]

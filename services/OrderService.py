@@ -41,7 +41,7 @@ class OrderService(Service):
         found = False
         for order in orders:
             if type_user in order and order[type_user] == email_user:
-                print(f"\nCode order: {order['code']}\nProduct: {order['product']}\nDistance: {order['address_client']}\nStatus: {order['status']}\n")
+                print(f"\nCode order: {order['code']}\nProduct: {order['product']}\nDistance: {order['address_client']}\nStatus: {order['status']}\nPayment method: {order['payment']['method']}\nPayment status: {order['payment']['status']}\n")
                 found = True
                 break
         if not found:

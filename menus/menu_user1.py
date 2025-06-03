@@ -1,11 +1,13 @@
 import getpass
 import bcrypt  
-from speedBox_izab3lla import User
+from services.UserService import UserService
+from models.User import User
 from validations import validate_cpf, validate_email, validate_pwd
 from models.Exceptions import PasswordOrEmailInvalidError
 
 #menu_usuari   (fazer login e criar conta)
 def register_user():
+    user_service = UserService('users.json')
     print("\n------- User Registration --------")
     name = input("Name: ")
     cpf = input("CPF:")
@@ -27,15 +29,16 @@ def register_user():
     #aqui eu chamo o user dict pra poder devolver como dicionario e salvar tudo no json com o create_account
     user_to_dict = user_register.user_dic(name, cpf, email, pwd_hash_str, user_type)
     #e aqui chamei o metodo de criar a conta, pra que o metodo possa receber esses dados que estao como dicionario e salva dentro do json.
-    User.create_account(user_to_dict)
+    user_service.create_account(user_to_dict)
 
 def login_user():
+    user_service = UserService('users.json')
     try:
         print("\n------- User Login --------")
         email = input("Email: ")
         pwd = getpass.getpass("Password: ")
         
         #chama a funcao de login do usuario, que vai verificar
-        return User.login(email,pwd)
+        return user_service.login(email,pwd)
     except PasswordOrEmailInvalidError as error:
         print(error)
