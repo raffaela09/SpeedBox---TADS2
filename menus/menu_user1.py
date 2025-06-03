@@ -1,12 +1,13 @@
 import getpass
-import bcrypt
-from speedBox_izab3lla import User
-from Validations import validate_cpf, validate_email, validate_pwd
-from models.Exceptions import CodeAlreadyExisitError, NoProductsToDisplayError
-from speedBox_Julia import Order
-from services.service import show_history
+import bcrypt  
+from services.UserService import UserService
+from models.User import User
+from validations import validate_cpf, validate_email, validate_pwd
+from models.Exceptions import PasswordOrEmailInvalidError
 
+#menu_usuari   (fazer login e criar conta)
 def register_user():
+    user_service = UserService('users.json')
     print("\n------- User Registration --------")
     name = input("Name: ")
     cpf = input("CPF:")
@@ -28,42 +29,16 @@ def register_user():
     #aqui eu chamo o user dict pra poder devolver como dicionario e salvar tudo no json com o create_account
     user_to_dict = user_register.user_dic(name, cpf, email, pwd_hash_str, user_type)
     #e aqui chamei o metodo de criar a conta, pra que o metodo possa receber esses dados que estao como dicionario e salva dentro do json.
-    User.create_account(user_to_dict)
+    user_service.create_account(user_to_dict)
 
 def login_user():
-    print("\n------- User Login --------")
-    email = input("Email: ")
-    pwd = getpass.getpass("Password: ")
-    
-    #chama a funcao de login do usuario, que vai verificar
-    return User.login(email,pwd)
-    
-
-def place_order_2(client):
+    user_service = UserService('users.json')
     try:
-        print("\n------- Place Order --------")
-        num_order = input("Code of order: ")
-        product = input("Product: ")
-        distance = int(input("Enter distance: "))
-        order = Order(num_order, client)
-        date_dic_order = order.dic_order(client.email, num_order, product, distance)
-        client.request_delivery(date_dic_order)
-    except CodeAlreadyExisitError as error:
+        print("\n------- User Login --------")
+        email = input("Email: ").strip().lower()
+        pwd = getpass.getpass("Password: ")
+        
+        #chama a funcao de login do usuario, que vai verificar
+        return user_service.login(email,pwd)
+    except PasswordOrEmailInvalidError as error:
         print(error)
-def options_user(client):
-    while True:
-        print("1 - Place Order\n2 - Show history.\n3 - Logout.")
-        answer_client = input("Enter your option: ")
-        if answer_client == "1":
-            try:
-                place_order_2(client)
-            except NoProductsToDisplayError as error:
-                print(error)
-        elif answer_client == "2":
-            show_history(client.user_type, client.email)
-        elif answer_client == "3":
-            break
-def received():
-    print("\n------- Confirm Order Receipt --------")
-    received_confirmation = input("Do you want to confirm the delivery? (yes/no): ").lower()
-    return received_confirmation == "yes"
