@@ -12,8 +12,6 @@ Delivery system with order management, developed with object-oriented structure.
 
 - Technologies
 
-- Installation
-
 - How to Use
 
 ## 📑 About
@@ -37,7 +35,8 @@ The system manages orders with unique codes, supports multiple payment methods, 
 
 - Python  
 - JSON  
-- bcrypt  
+- bcrypt
+- OpenRouter API 
 
 ## 🧪 How to Use
 
