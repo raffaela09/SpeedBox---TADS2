@@ -17,7 +17,7 @@ Delivery system with order management, developed with object-oriented structure.
 ## 📑 About
 
 SpeedBox is a Python-based delivery management system, using OOP with inheritance, encapsulation, and class association. It uses JSON files for data persistence and the bcrypt library for secure authentication via password hashing.  
-The system manages orders with unique codes, supports multiple payment methods, and offers flexibility for different types of transport, ensuring scalability and security for operations.
+The system manages orders with unique codes, supports multiple payment methods, offers flexibility for different types of transport, and integrates with the Open Route Service API to provide routing and geolocation features, ensuring scalability and security for operations.
 
 ## 📌 Class Diagram
 
@@ -40,17 +40,16 @@ The system manages orders with unique codes, supports multiple payment methods, 
 
 ## 🧪 How to Use
 
-1. Download dependencies:  
-Install the `bcrypt` library:
-```bash
-pip install bcrypt
-```
-
-2. Clone the repository:  
+1. Clone the repository:  
 Clone the project and access the folder:
 ```bash
 git clone https://github.com/raffaela09/SpeedBox---TADS2.git
 cd SpeedBox--TADS2
+```
+
+2. Download dependencies:  
+```bash
+pip install -r requirements.txt
 ```
 
 3. Run the application:  
