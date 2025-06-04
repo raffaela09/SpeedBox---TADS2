@@ -6,6 +6,7 @@ class Payment(ABC):
         self.value = value
         self.confirmed = False
         self.refunded = False
+        self.status = 'awaiting'
     @abstractmethod
     def confirm_payment(self):
         pass
@@ -46,7 +47,7 @@ class Credit(Payment):
         return {
             'method': 'credit',
             'value': self.value,
-            'status': 'awaiting'
+            'status': self.status
         }
 
 class Debit(Payment):
@@ -73,7 +74,7 @@ class Debit(Payment):
         return {
             'method': 'debit',
             'value': self.value,
-            'status': 'awaiting'
+            'status': self.status
         }
 
 class Pix(Payment):
@@ -104,7 +105,7 @@ class Pix(Payment):
         return {
             'method': 'pix',
             'value': self.value,
-            'status': 'awaiting'
+            'status': self.status
         }
 
 class Cash(Payment):
@@ -124,5 +125,5 @@ class Cash(Payment):
         return {
             'method': 'cash',
             'value': self.value,
-            'status': 'awaiting'
+            'status': self.status
         }

@@ -58,7 +58,7 @@ def place_order(client, product, address_client, pay_on_delivery, payment_method
             client_service.request_delivery(order.data_order_dic())
             order.message_code()
         elif pay_on_delivery == 'n':
-            order.payment['status'] = 'paid'
+            order.payment.status = 'paid'
             client_service.request_delivery(order.data_order_dic())
             order.message_code()
         else:
@@ -72,6 +72,7 @@ def place_order(client, product, address_client, pay_on_delivery, payment_method
 def options_user(client):
     order_service = OrderService("orders.json") 
     while True:
+        print("\n------- Client --------\n")
         print("1 - Place Order\n2 - Show history.\n3 - Logout.")
         answer_client = input("Enter your option: ")
         #cria o pedido
