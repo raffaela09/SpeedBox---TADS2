@@ -12,19 +12,6 @@ class Delivery:
     def address_client(self, value):
         self.__address_client = value
     #------------------------------------------------------------    
-    # @property
-    # def address_manager(self):
-    #     return self.__address_manager
-    # @address_manager.setter
-    # def address_manager(self, value):
-    #     self.__address_manager = value
-    
-    # @property
-    # def address_delivery_man(self):
-    #     return self.__address_delivery_man
-    # @address_delivery_man
-    # def address_delivery_man(self, value):
-    #     self.__address_delivery_man = value
     
     
 #o geo recebe os endereços como av. Olinto Mancini e transforma ela em coordenadas
@@ -49,10 +36,7 @@ class Delivery:
         return coords
     #------------------------------------------------------------
 
-#fazer o requirements.txt e adicionar no readme
-
-   
-    #dividir isso aqui em dois metodos, um calcula o tempo e outro a distancia.
+   #funcao para calcular a distancia
     def distance_time(self, pickup, destination, transport):
     #ja com directions é possivel fazer o calculo que precisamento, ou seja, o geo é um caminho que 
     #precisamos seguir para conseguir a distancia e a duração

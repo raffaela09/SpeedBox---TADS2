@@ -1,30 +1,3 @@
 [
-    {
-        "client": "rafaela@gmail.com",
-        "code": 7566,
-        "product": "flor",
-        "address_client": [
-            -51.676674,
-            -20.794953
-        ],
-        "status": "out for delivery",
-        "date_time": "04/06/2025 03:32:25",
-        "payment": {
-            "method": "credit",
-            "value": 10.0,
-            "status": "paid"
-        },
-        "manager": "rafaela096@gmail.com",
-        "address_manager": [
-            -51.704595,
-            -20.790108
-        ],
-        "deliveryman": "rafaela09@gmail.com",
-        "address_delivery_man": [
-            -51.690639,
-            -20.78999
-        ],
-        "estimated_time": 10.976666666666667,
-        "km": 6.4323999999999995
-    }
+
 ]
