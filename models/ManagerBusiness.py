@@ -31,7 +31,9 @@ class ManagerBusiness(User):
     
     '''Funcao responsavel por cancelar um pedido, ela funciona da mesma forma que a anterior, verifica atravez do codigo do pedido se esta no json e com o status em espera, caso esteja, ele chama a funcao de atualizar os dados no json, que recebe os dados que vao ser
     atualizados e por qual chave deve-se procurar dentro do json para que possa ser atualizado, caso contrario, ele levanta uma excecao
-    '''             
+    '''    
+    #arrumar isso aq
+             
     def refuse_delivery(self, num_order, email, user_type):
         try:
             order_service = OrderService("orders.json")

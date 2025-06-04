@@ -60,7 +60,7 @@ class Order:
     '''Para mostrar uma mensagem ao usuario (cliente) ao concluir seu pedido'''
      #por nao usar self, nem algum atributo de objeto, sendo assim, utilizamos staticmethod
     def message_code(self):
-        print(f"Order placed successfully!\nOrder code: {self.code}")
+        return f"Order placed successfully!\nOrder code: {self.code}" #fazeer o print no menu
     #---------------------------------- 
     
     '''Funcao para pegar a data e hora do momento, para que possa armazenar no pedido, utilizei a classe datetime, e formatei a data para uma string'''
@@ -76,7 +76,7 @@ class Order:
     '''funcao para retornar os dados dentro de um dicionario, para que assim possa salvar dentro do json'''   
     def data_order_dic(self):
         return {
-            'cliente': self.email_client,
+            'client': self.email_client,
             'code': self.code,
             'product': self.product,
             'address_client': self.address_client,

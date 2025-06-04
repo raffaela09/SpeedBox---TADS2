@@ -18,3 +18,7 @@ class CpfInvalidError(Exception):
     pass
 class PasswordOrEmailInvalidError(Exception):
     pass
+class EmailAlreadyRegisteredError(Exception):
+    pass
+class CpfAlreadyRegisteredError(Exception):
+    pass

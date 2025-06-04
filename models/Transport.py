@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 
 class Transport(ABC):
+    @staticmethod
     @abstractmethod
-    def type_transport(distance):
+    def type_transport():
         pass
     
 class Car(Transport):
@@ -20,4 +21,4 @@ class Motorcycle(Transport):
 class Bicycle(Transport):
     
     def type_transport(distance):
-        return 'cycling-regular'
+        return 'cycling-regular' #isso retorna o profile do directions

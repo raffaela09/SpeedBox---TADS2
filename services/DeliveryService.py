@@ -19,7 +19,7 @@ class DeliveryService(Service):
         orders = self.load_data()
         
         for order in orders:
-            if int(order['code'] == int(num_order)):
+            if int(order['code']) == int(num_order):
                 payment = order['payment']
                 if payment['status'] == 'awaiting':
                     order['payment']['status'] = 'paid'
@@ -38,7 +38,6 @@ class DeliveryService(Service):
        orders = order_service.load_data()
        for order in orders:
             if int(order['code']) == int(num_order):
-                # order['estimated_time'] = transport.estimated_time(distance = order['distance'])
                 order['address_delivery_man'] = address_delivery_man
                 order['estimated_time'] = estimated_time
                 order['km'] = km

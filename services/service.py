@@ -18,7 +18,7 @@ class Service:
         try:
             with open(self._name_file, "r") as file:
                 return json.load(file)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
             return []
     '''Metodo para salvar dados dentro do json, passa o dados que deseja salvar, e o nome do arquivo no qual vai salvar'''   
     def save_data(self, data):        
@@ -44,14 +44,3 @@ class Service:
         if not found:
             raise ItemNotFoundError("Item not found.")
         self.save_data(data)
-   
-    '''deletar dados de dentro do json, ele verifica de acordo com o id (email, ou codigo do pedido) se o item possuir o "id"
-    igual, ele adiciona a uma nova lista, e depois salva com o metodo "save_data", dessa forma, tirando o item que desejava excluir.
-    '''   
-    def delete_data(self, type_id, id_user):
-        data = self.load_data()
-        new_data = []
-        for item in data:
-            if item[type_id] != id_user:
-                new_data.append(item)
-        self.save_data(new_data)

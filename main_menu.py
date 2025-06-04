@@ -7,9 +7,11 @@ from menus.menu_deliveryman import options_deliveryman
 from menus.menu_client import options_user
 from services.Service import Service
 
+#fazer requirements.txt
+
 while True:
     print("\n--------Welcome!!---------\n")
-    print("1 - Create account.\n2 - Login.\n3 - Logout.\n") #trocar a ser
+    print("1 - Create account.\n2 - Login.\n3 - Logout.\n") #
     option = input("Enter your option: ")
     if option == "1":
         register_user()
@@ -20,7 +22,7 @@ while True:
         users = FILE_USER.load_data()
         user_data = login_user()
 
-        if user_data and user_data["type_user"] == "cliente":
+        if user_data and user_data["type_user"] == "client": #passar p ingles
                 client = Client(
                     name = user_data["name"],
                     cpf= user_data["cpf"],
@@ -29,7 +31,7 @@ while True:
                     user_type= user_data["type_user"],
                 )
                 options_user(client)
-        elif user_data and user_data["type_user"] == "gerente":
+        elif user_data and user_data["type_user"] == "manager": #passar p ingles
             manager = ManagerBusiness(
                 name = user_data["name"],
                 cpf= user_data["cpf"],
@@ -39,7 +41,7 @@ while True:
                 )
             
             options_manager(manager)
-        elif user_data and user_data["type_user"] == "entregador":
+        elif user_data and user_data["type_user"] == "deliveryman": #passar p ingles 
             delivery_man = DeliveryMan(
                     name = user_data["name"],
                     cpf= user_data["cpf"],

@@ -2,7 +2,7 @@ from models.Exceptions import ProductNotFoundError, NoProductsToDisplayError, Tr
 from models.Transport import Bicycle, Car, Motorcycle
 from models.Delivery import Delivery
 from services.OrderService import OrderService
-
+#colocar agregacao simples no diagrama
 
 '''Funcao para escolher o transporte do entregador e retornar o profile de acordo com o directions da api (openrouteservice)'''
 def chose_transport():
@@ -23,7 +23,9 @@ def chose_transport():
 def make_delivery_menu(deliveryman):
     order_service = OrderService("orders.json")
     try:
-        order_service.show_informations("out for delivery")
+        orders = order_service.show_informations("out for delivery")
+        for order in orders: 
+            print(f"ORDERS OUT FOR DELIVERY:\nClient: {order["client"]}\nCode: {order["code"]}\nProduct: {order["product"]}\n")
         code_deliveryman = input("Type code of order: ")
         deliveryman.make_delivery(
             num_order = code_deliveryman, 
@@ -33,13 +35,16 @@ def make_delivery_menu(deliveryman):
     except (ProductNotFoundError, NoOrdersError) as error:
             print(error)
 #-----------------------------------------------------------------------------------
-
+#VE SE DA P SEPARAR ESSA BOMBA
 '''Funcao para exibir os input e transferir os dados para o service ao coletar o pedido.'''          
 def collect_delivery_menu(deliveryman):
     order_service = OrderService("orders.json")
     json_load = order_service.load_data()
     try:
-        order_service.show_informations("awaiting pickup")
+        orders = order_service.show_informations("awaiting pickup")
+        for order in orders:
+            print(f"ORDERS AWAITING PICKUP:\nClient: {order["client"]}\nCode: {order["code"]}\nProduct: {order["product"]}\n")
+
         transport = chose_transport()
         code_deliveryman = int(input("Enter code of order: "))
         address_delivery_man = input("Enter your address: ")
@@ -90,7 +95,9 @@ def options_deliveryman(delivery_man):
                 print(error)
         elif answer_delivery_man == "3":
             try:
-                order_service.show_history(delivery_man.user_type, delivery_man.email)
+                orders = order_service.show_history(delivery_man.user_type, delivery_man.email)
+                for order in orders:
+                    print(f"\nCode order: {order['code']}\nProduct: {order['product']}\nDistance: {order['address_client']}\nStatus: {order['status']}\nPayment method: {order['payment']['method']}\nPayment status: {order['payment']['status']}\n")
             except NoProductsToDisplayError as error:
                     print(error)
         elif answer_delivery_man == '4':

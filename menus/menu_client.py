@@ -56,11 +56,12 @@ def place_order(client, product, address_client, pay_on_delivery, payment_method
         order = create_order(client.email, product, address_client, payment_method)
         if pay_on_delivery == 'y':
             client_service.request_delivery(order.data_order_dic())
-            order.message_code()
+            print(order.message_code())
         elif pay_on_delivery == 'n':
             order.payment.status = 'paid'
             client_service.request_delivery(order.data_order_dic())
-            order.message_code()
+
+            print(order.message_code())
         else:
             print('Inválid option for payment.')
             
@@ -85,7 +86,9 @@ def options_user(client):
         #para ver historico de pedidos
         elif answer_client == "2":
             try:
-                order_service.show_history(type_user = client.user_type, email_user = client.email)
+                orders = order_service.show_history(type_user = client.user_type, email_user = client.email)
+                for order in orders:
+                    print(f"\nCode order: {order['code']}\nProduct: {order['product']}\nDistance: {order['address_client']}\nStatus: {order['status']}\nPayment method: {order['payment']['method']}\nPayment status: {order['payment']['status']}\n")
             except NoProductsToDisplayError as error:
                 print(error)
         #para sair

@@ -1,9 +1,23 @@
 [
     {
         "name": "rafaela",
+        "cpf": "12345678911",
+        "email": "rafaela@gmail.com",
+        "pwd": "$2b$12$e4XBc6C4ELEN.25uHsejDu3/jws9tBmFhHv5Sq3r2TYtVGilkmNKG",
+        "type_user": "client"
+    },
+    {
+        "name": "rafaela ",
         "cpf": "08238539188",
         "email": "rafaela09@gmail.com",
-        "pwd": "$2b$12$iWhIhR7ysgHabXUwbSTReezyPQmKkJhlsb8EoJQlY22GsLOeU/Twu",
-        "type_user": "cliente"
+        "pwd": "$2b$12$zaT8o4/O6Dqy//ZFBm7t0u1ZnGOQ/0Kmu3eW/JjOsphE9gQRuZZ9W",
+        "type_user": "deliveryman"
+    },
+    {
+        "name": "rafaela",
+        "cpf": "23456789011",
+        "email": "rafaela096@gmail.com",
+        "pwd": "$2b$12$vS1/0aQzPeQwxKNTWRFVPue/qbxpBzVzsmO6gWHXnninQQQNJ6g/6",
+        "type_user": "manager"
     }
 ]

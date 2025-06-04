@@ -12,7 +12,6 @@ class UserService(Service):
             if user ["email"] == email:
                 hashed_pwd = user["pwd"].encode('utf-8') # Pega o hash da senha armazenada e codifica para bytes
                 if bcrypt.checkpw(pwd.encode('utf-8'), hashed_pwd): #Compara a senha digitada
-                        print(f"\nEmail confirmed! Welcome {user["name"].upper()}!\n")
                         return user 
         raise PasswordOrEmailInvalidError("\nIncorrect e-mail or password!")
             

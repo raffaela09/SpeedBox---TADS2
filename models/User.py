@@ -28,6 +28,7 @@ class User(Person):
     def __init__(self, name: str, cpf: str, email: str, pwd: str, user_type: str):
         super().__init__(name, cpf) 
         self.__id = str(uuid.uuid4())[:4] # Retrieves only the first 4 characters of the UUID
+        self.__cpf = cpf
         self._email = email # Attributes are protected to support inheritance
         self.__pwd = pwd# Private attribute due to sensitive content
         self._user_type = user_type 
@@ -60,11 +61,11 @@ class User(Person):
     def user_type(self, value):
         self._user_type = value
 
-    def user_dic(self, name, cpf, email, pwd, user_type): #creating the dictionary for the json
+    def user_dic(self): #creating the dictionary for the json
       return {
-          "name": name,
-          "cpf": cpf,
-          "email": email,
-          "pwd": pwd,
-          "type_user": user_type
+          "name": self.name,
+          "cpf": self.__cpf,
+          "email": self.email,
+          "pwd": self._pwd,
+          "type_user": self._user_type
       }  
