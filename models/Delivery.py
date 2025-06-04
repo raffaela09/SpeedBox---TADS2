@@ -2,7 +2,6 @@ import openrouteservice #precisa ser baixado, por ser uma biblioteca, mas a gent
 class Delivery:
     def __init__(self, addres_client):
         '''Aqui consome a api, sendo exatamente a chave dela'''
-
         self.__address_client = addres_client
 
     
@@ -31,7 +30,7 @@ class Delivery:
 #o geo recebe os endereços como av. Olinto Mancini e transforma ela em coordenadas
 #de longitude e latitude, acredito que é o melhor jeito visto que ninguem sabe as coordenadas de casa
 #mas sim o endereço
-    api_key = "5b3ce3597851110001cf6248bc7c0fcca0904e64afd670a881b44ec5"
+    api_key = "5b3ce3597851110001cf6248bc7c0fcca0904e64afd670a881b44ec5" # isso talvez devesse ficar 
 
     client = openrouteservice.Client(key = api_key)
     # nao da a rota exata, no caso as coordenadas, mesmo passando o numero, e centralizando a busca dentro da cidade, mesmo assim, pode dar em outra cidade, mas em ruas e avenidas mais famosas ele passa bem proximo
