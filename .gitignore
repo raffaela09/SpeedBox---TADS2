@@ -1,0 +1,4 @@
+.env
+
+#aqui da pra colocar todos os arquivos sensiveis e que queremos que seja ignorado
+#como o .env que nao queremos que apareca na nossa branch main
